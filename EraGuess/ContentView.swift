@@ -6,12 +6,15 @@
 //
 
 import AnalyticsDomain
+import HomeUI
 import OnboardingUI
 import Permission
 import StateFeature
 import SwiftUI
 
 struct ContentView: View {
+    @State var navigationManager: NavigationManager
+
     let appStateManager: AppStateManager
     let analyticsManager: AnalyticsManager
     let notificationPermissionProvider: NotificationPermissionProvider
@@ -27,7 +30,7 @@ struct ContentView: View {
     }
 
     private var appView: some View {
-        Text("Hello, world!")
+        homeFeature
     }
 }
 
@@ -40,5 +43,34 @@ extension ContentView {
                 appStateManager.$hasSeenOnboarding.withLock { $0 = true }
             }
         )
+    }
+}
+
+extension ContentView {
+    private var homeFeature: some View {
+        NavigationStack(path: $navigationManager.homeRouter.path) {
+            HomeView()
+        }
+        .navigationDestination(for: HomeUI.Destination.self, destination: handle(_:))
+        .sheet(item: $navigationManager.homeRouter.sheet, content: handle(_:))
+        .fullScreenCover(item: $navigationManager.homeRouter.fullScreen, content: handle(_:))
+    }
+
+    @ViewBuilder
+    private func handle(_ destination: HomeUI.Destination) -> some View {
+        switch destination {
+        case .unknown:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private func handle(_ page: HomeUI.Page) -> some View {
+        switch page {
+        case .settings:
+            EmptyView()
+        case .subscription:
+            EmptyView()
+        }
     }
 }

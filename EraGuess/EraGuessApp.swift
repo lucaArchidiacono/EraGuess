@@ -22,6 +22,7 @@ struct EraGuessApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(
+                navigationManager: dependencyProvider.navigationManager,
                 appStateManager: dependencyProvider.appStateManager,
                 analyticsManager: dependencyProvider.analyticsManager,
                 notificationPermissionProvider: dependencyProvider.notificationPermissionProvider

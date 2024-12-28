@@ -34,6 +34,7 @@
 		0F5C70912D2067DC002EF106 /* OnboardingUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70902D2067DC002EF106 /* OnboardingUI */; };
 		0F5C70952D2068BD002EF106 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70942D2068BD002EF106 /* Models */; };
 		0F5C70BF2D2076A0002EF106 /* StateFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70BE2D2076A0002EF106 /* StateFeature */; };
+		0F7FCB5E2D20A02500D07E8D /* HomeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7FCB5D2D20A02500D07E8D /* HomeUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 				0F44D3102D201C3400698999 /* AnalyticsFeature in Frameworks */,
 				0F44D2F42D201B5E00698999 /* SubscriptionDomain in Frameworks */,
 				0F44D2F92D201B8100698999 /* SoundEffectFeature in Frameworks */,
+				0F7FCB5E2D20A02500D07E8D /* HomeUI in Frameworks */,
 				0F5C70542D2021BE002EF106 /* UINavigation in Frameworks */,
 				0F44D2FF2D201B9F00698999 /* REST in Frameworks */,
 				0F5C6FC32D201CC9002EF106 /* SubscriptionFeature in Frameworks */,
@@ -168,6 +170,7 @@
 				0F5C70902D2067DC002EF106 /* OnboardingUI */,
 				0F5C70942D2068BD002EF106 /* Models */,
 				0F5C70BE2D2076A0002EF106 /* StateFeature */,
+				0F7FCB5D2D20A02500D07E8D /* HomeUI */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -213,6 +216,7 @@
 				0F5C708F2D2067DC002EF106 /* XCLocalSwiftPackageReference "Packages/OnboardingUI" */,
 				0F5C70932D2068BD002EF106 /* XCLocalSwiftPackageReference "Packages/Models" */,
 				0F5C70BD2D2076A0002EF106 /* XCLocalSwiftPackageReference "Packages/StateFeature" */,
+				0F7FCB5C2D20A02500D07E8D /* XCLocalSwiftPackageReference "Packages/HomeUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
@@ -533,6 +537,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/StateFeature;
 		};
+		0F7FCB5C2D20A02500D07E8D /* XCLocalSwiftPackageReference "Packages/HomeUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/HomeUI;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -643,6 +651,10 @@
 		0F5C70BE2D2076A0002EF106 /* StateFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StateFeature;
+		};
+		0F7FCB5D2D20A02500D07E8D /* HomeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HomeUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
