@@ -6,6 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0F44D2F42D201B5E00698999 /* SubscriptionDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2F32D201B5E00698999 /* SubscriptionDomain */; };
+		0F44D2F62D201B5E00698999 /* SubscriptionFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2F52D201B5E00698999 /* SubscriptionFeature */; };
+		0F44D2F92D201B8100698999 /* SoundEffectFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2F82D201B8100698999 /* SoundEffectFeature */; };
+		0F44D2FC2D201B8B00698999 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2FB2D201B8B00698999 /* SharedUI */; };
+		0F44D2FF2D201B9F00698999 /* REST in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2FE2D201B9F00698999 /* REST */; };
+		0F44D3022D201BA900698999 /* Logger in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D3012D201BA900698999 /* Logger */; };
+		0F44D3052D201BB100698999 /* Fundamentals in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D3042D201BB100698999 /* Fundamentals */; };
+		0F44D3082D201BC100698999 /* HapticFeedbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D3072D201BC100698999 /* HapticFeedbackFeature */; };
+		0F44D30B2D201BDA00698999 /* Permission in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D30A2D201BDA00698999 /* Permission */; };
+		0F44D30E2D201C3400698999 /* AnalyticsDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D30D2D201C3400698999 /* AnalyticsDomain */; };
+		0F44D3102D201C3400698999 /* AnalyticsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D30F2D201C3400698999 /* AnalyticsFeature */; };
+		0F5C6FBC2D201CC1002EF106 /* AnalyticsDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FBB2D201CC1002EF106 /* AnalyticsDomain */; };
+		0F5C6FBE2D201CC1002EF106 /* AnalyticsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FBD2D201CC1002EF106 /* AnalyticsFeature */; };
+		0F5C6FC12D201CC9002EF106 /* SubscriptionDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FC02D201CC9002EF106 /* SubscriptionDomain */; };
+		0F5C6FC32D201CC9002EF106 /* SubscriptionFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FC22D201CC9002EF106 /* SubscriptionFeature */; };
+		0F5C6FC62D201CD7002EF106 /* SoundEffectFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FC52D201CD7002EF106 /* SoundEffectFeature */; };
+		0F5C6FC92D201CE0002EF106 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FC82D201CE0002EF106 /* SharedUI */; };
+		0F5C6FCC2D201CE9002EF106 /* REST in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FCB2D201CE9002EF106 /* REST */; };
+		0F5C6FCF2D201CF3002EF106 /* Permission in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FCE2D201CF3002EF106 /* Permission */; };
+		0F5C6FD22D201CFB002EF106 /* HapticFeedbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FD12D201CFB002EF106 /* HapticFeedbackFeature */; };
+		0F5C6FD52D201D03002EF106 /* Fundamentals in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FD42D201D03002EF106 /* Fundamentals */; };
+		0F5C6FD82D201D0C002EF106 /* Logger in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FD72D201D0C002EF106 /* Logger */; };
+		0F5C70542D2021BE002EF106 /* UINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70532D2021BE002EF106 /* UINavigation */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0F44D2BC2D200CC700698999 /* EraGuess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EraGuess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -16,6 +42,11 @@
 			path = EraGuess;
 			sourceTree = "<group>";
 		};
+		0F5C70292D201FC7002EF106 /* Packages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +54,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F5C6FCC2D201CE9002EF106 /* REST in Frameworks */,
+				0F5C6FD52D201D03002EF106 /* Fundamentals in Frameworks */,
+				0F44D3022D201BA900698999 /* Logger in Frameworks */,
+				0F5C6FC12D201CC9002EF106 /* SubscriptionDomain in Frameworks */,
+				0F5C6FD82D201D0C002EF106 /* Logger in Frameworks */,
+				0F5C6FD22D201CFB002EF106 /* HapticFeedbackFeature in Frameworks */,
+				0F44D3052D201BB100698999 /* Fundamentals in Frameworks */,
+				0F44D2F62D201B5E00698999 /* SubscriptionFeature in Frameworks */,
+				0F5C6FC62D201CD7002EF106 /* SoundEffectFeature in Frameworks */,
+				0F5C6FBE2D201CC1002EF106 /* AnalyticsFeature in Frameworks */,
+				0F5C6FCF2D201CF3002EF106 /* Permission in Frameworks */,
+				0F44D30B2D201BDA00698999 /* Permission in Frameworks */,
+				0F44D2FC2D201B8B00698999 /* SharedUI in Frameworks */,
+				0F44D30E2D201C3400698999 /* AnalyticsDomain in Frameworks */,
+				0F44D3102D201C3400698999 /* AnalyticsFeature in Frameworks */,
+				0F44D2F42D201B5E00698999 /* SubscriptionDomain in Frameworks */,
+				0F44D2F92D201B8100698999 /* SoundEffectFeature in Frameworks */,
+				0F5C70542D2021BE002EF106 /* UINavigation in Frameworks */,
+				0F44D2FF2D201B9F00698999 /* REST in Frameworks */,
+				0F5C6FC32D201CC9002EF106 /* SubscriptionFeature in Frameworks */,
+				0F5C6FC92D201CE0002EF106 /* SharedUI in Frameworks */,
+				0F44D3082D201BC100698999 /* HapticFeedbackFeature in Frameworks */,
+				0F5C6FBC2D201CC1002EF106 /* AnalyticsDomain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +88,7 @@
 			children = (
 				0F44D2BE2D200CC700698999 /* EraGuess */,
 				0F44D2BD2D200CC700698999 /* Products */,
+				0F5C70292D201FC7002EF106 /* Packages */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +120,29 @@
 			);
 			name = EraGuess;
 			packageProductDependencies = (
+				0F44D2F32D201B5E00698999 /* SubscriptionDomain */,
+				0F44D2F52D201B5E00698999 /* SubscriptionFeature */,
+				0F44D2F82D201B8100698999 /* SoundEffectFeature */,
+				0F44D2FB2D201B8B00698999 /* SharedUI */,
+				0F44D2FE2D201B9F00698999 /* REST */,
+				0F44D3012D201BA900698999 /* Logger */,
+				0F44D3042D201BB100698999 /* Fundamentals */,
+				0F44D3072D201BC100698999 /* HapticFeedbackFeature */,
+				0F44D30A2D201BDA00698999 /* Permission */,
+				0F44D30D2D201C3400698999 /* AnalyticsDomain */,
+				0F44D30F2D201C3400698999 /* AnalyticsFeature */,
+				0F5C6FBB2D201CC1002EF106 /* AnalyticsDomain */,
+				0F5C6FBD2D201CC1002EF106 /* AnalyticsFeature */,
+				0F5C6FC02D201CC9002EF106 /* SubscriptionDomain */,
+				0F5C6FC22D201CC9002EF106 /* SubscriptionFeature */,
+				0F5C6FC52D201CD7002EF106 /* SoundEffectFeature */,
+				0F5C6FC82D201CE0002EF106 /* SharedUI */,
+				0F5C6FCB2D201CE9002EF106 /* REST */,
+				0F5C6FCE2D201CF3002EF106 /* Permission */,
+				0F5C6FD12D201CFB002EF106 /* HapticFeedbackFeature */,
+				0F5C6FD42D201D03002EF106 /* Fundamentals */,
+				0F5C6FD72D201D0C002EF106 /* Logger */,
+				0F5C70532D2021BE002EF106 /* UINavigation */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -94,6 +172,18 @@
 			);
 			mainGroup = 0F44D2B32D200CC700698999;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0F5C6FBA2D201CC1002EF106 /* XCLocalSwiftPackageReference "Packages/AnalyticsFeature" */,
+				0F5C6FBF2D201CC9002EF106 /* XCLocalSwiftPackageReference "Packages/SubscriptionFeature" */,
+				0F5C6FC42D201CD7002EF106 /* XCLocalSwiftPackageReference "Packages/SoundEffectFeature" */,
+				0F5C6FC72D201CE0002EF106 /* XCLocalSwiftPackageReference "Packages/SharedUI" */,
+				0F5C6FCA2D201CE9002EF106 /* XCLocalSwiftPackageReference "Packages/REST" */,
+				0F5C6FCD2D201CF3002EF106 /* XCLocalSwiftPackageReference "Packages/Permission" */,
+				0F5C6FD02D201CFB002EF106 /* XCLocalSwiftPackageReference "Packages/HapticFeedbackFeature" */,
+				0F5C6FD32D201D03002EF106 /* XCLocalSwiftPackageReference "Packages/Fundamentals" */,
+				0F5C6FD62D201D0C002EF106 /* XCLocalSwiftPackageReference "Packages/Logger" */,
+				0F5C70522D2021BE002EF106 /* XCLocalSwiftPackageReference "Packages/UINavigation" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
 			projectDirPath = "";
@@ -248,7 +338,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EraGuess/Preview Content\"";
-				DEVELOPMENT_TEAM = QN588PA8U9;
+				DEVELOPMENT_TEAM = 27QQ4H5V76;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -287,7 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EraGuess/Preview Content\"";
-				DEVELOPMENT_TEAM = QN588PA8U9;
+				DEVELOPMENT_TEAM = 27QQ4H5V76;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -339,6 +429,144 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0F5C6FBA2D201CC1002EF106 /* XCLocalSwiftPackageReference "Packages/AnalyticsFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/AnalyticsFeature;
+		};
+		0F5C6FBF2D201CC9002EF106 /* XCLocalSwiftPackageReference "Packages/SubscriptionFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SubscriptionFeature;
+		};
+		0F5C6FC42D201CD7002EF106 /* XCLocalSwiftPackageReference "Packages/SoundEffectFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SoundEffectFeature;
+		};
+		0F5C6FC72D201CE0002EF106 /* XCLocalSwiftPackageReference "Packages/SharedUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SharedUI;
+		};
+		0F5C6FCA2D201CE9002EF106 /* XCLocalSwiftPackageReference "Packages/REST" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/REST;
+		};
+		0F5C6FCD2D201CF3002EF106 /* XCLocalSwiftPackageReference "Packages/Permission" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Permission;
+		};
+		0F5C6FD02D201CFB002EF106 /* XCLocalSwiftPackageReference "Packages/HapticFeedbackFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/HapticFeedbackFeature;
+		};
+		0F5C6FD32D201D03002EF106 /* XCLocalSwiftPackageReference "Packages/Fundamentals" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Fundamentals;
+		};
+		0F5C6FD62D201D0C002EF106 /* XCLocalSwiftPackageReference "Packages/Logger" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Logger;
+		};
+		0F5C70522D2021BE002EF106 /* XCLocalSwiftPackageReference "Packages/UINavigation" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/UINavigation;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F44D2F32D201B5E00698999 /* SubscriptionDomain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SubscriptionDomain;
+		};
+		0F44D2F52D201B5E00698999 /* SubscriptionFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SubscriptionFeature;
+		};
+		0F44D2F82D201B8100698999 /* SoundEffectFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SoundEffectFeature;
+		};
+		0F44D2FB2D201B8B00698999 /* SharedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedUI;
+		};
+		0F44D2FE2D201B9F00698999 /* REST */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = REST;
+		};
+		0F44D3012D201BA900698999 /* Logger */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Logger;
+		};
+		0F44D3042D201BB100698999 /* Fundamentals */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Fundamentals;
+		};
+		0F44D3072D201BC100698999 /* HapticFeedbackFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HapticFeedbackFeature;
+		};
+		0F44D30A2D201BDA00698999 /* Permission */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Permission;
+		};
+		0F44D30D2D201C3400698999 /* AnalyticsDomain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AnalyticsDomain;
+		};
+		0F44D30F2D201C3400698999 /* AnalyticsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AnalyticsFeature;
+		};
+		0F5C6FBB2D201CC1002EF106 /* AnalyticsDomain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AnalyticsDomain;
+		};
+		0F5C6FBD2D201CC1002EF106 /* AnalyticsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AnalyticsFeature;
+		};
+		0F5C6FC02D201CC9002EF106 /* SubscriptionDomain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SubscriptionDomain;
+		};
+		0F5C6FC22D201CC9002EF106 /* SubscriptionFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SubscriptionFeature;
+		};
+		0F5C6FC52D201CD7002EF106 /* SoundEffectFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SoundEffectFeature;
+		};
+		0F5C6FC82D201CE0002EF106 /* SharedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedUI;
+		};
+		0F5C6FCB2D201CE9002EF106 /* REST */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = REST;
+		};
+		0F5C6FCE2D201CF3002EF106 /* Permission */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Permission;
+		};
+		0F5C6FD12D201CFB002EF106 /* HapticFeedbackFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HapticFeedbackFeature;
+		};
+		0F5C6FD42D201D03002EF106 /* Fundamentals */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Fundamentals;
+		};
+		0F5C6FD72D201D0C002EF106 /* Logger */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Logger;
+		};
+		0F5C70532D2021BE002EF106 /* UINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UINavigation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0F44D2B42D200CC700698999 /* Project object */;
 }
