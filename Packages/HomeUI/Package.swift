@@ -19,6 +19,7 @@ let package = Package(
         .package(path: "../AnalyticsFeature"),
         .package(path: "../Models"),
         .package(path: "../StateFeature"),
+        .package(path: "../UINavigation"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -29,6 +30,7 @@ let package = Package(
                 "AnalyticsFeature",
                 "Models",
                 "StateFeature",
+                "UINavigation",
             ]
         ),
     ]

@@ -17,6 +17,7 @@ public enum Destination: Hashable, Identifiable {
 public enum Page: Hashable, Identifiable {
     case settings
     case subscription
+    case game
 
     public var id: Self { self }
 }

@@ -49,7 +49,9 @@ extension ContentView {
 extension ContentView {
     private var homeFeature: some View {
         NavigationStack(path: $navigationManager.homeRouter.path) {
-            HomeView()
+            HomeView(
+                router: navigationManager.homeRouter
+            )
         }
         .navigationDestination(for: HomeUI.Destination.self, destination: handle(_:))
         .sheet(item: $navigationManager.homeRouter.sheet, content: handle(_:))
@@ -71,6 +73,8 @@ extension ContentView {
             EmptyView()
         case .subscription:
             EmptyView()
+        case .game:
+            Text("Game")
         }
     }
 }
