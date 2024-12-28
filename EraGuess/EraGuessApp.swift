@@ -21,8 +21,9 @@ struct EraGuessApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .onChange(of: scenePhase, initial: true) { _, _ in
+            ContentView(dependencyProvider: dependencyProvider)
+                .onChange(of: scenePhase, initial: true) { _, newValue in
+                    handleScenePhase(newValue)
                 }
         }
     }

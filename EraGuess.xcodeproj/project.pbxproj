@@ -31,6 +31,9 @@
 		0F5C6FD82D201D0C002EF106 /* Logger in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FD72D201D0C002EF106 /* Logger */; };
 		0F5C70542D2021BE002EF106 /* UINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70532D2021BE002EF106 /* UINavigation */; };
 		0F5C705D2D202764002EF106 /* EraGuessShared in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C705C2D202764002EF106 /* EraGuessShared */; };
+		0F5C70912D2067DC002EF106 /* OnboardingUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70902D2067DC002EF106 /* OnboardingUI */; };
+		0F5C70952D2068BD002EF106 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70942D2068BD002EF106 /* Models */; };
+		0F5C70BF2D2076A0002EF106 /* StateFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70BE2D2076A0002EF106 /* StateFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,9 +71,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F5C70BF2D2076A0002EF106 /* StateFeature in Frameworks */,
 				0F5C6FCC2D201CE9002EF106 /* REST in Frameworks */,
 				0F5C6FD52D201D03002EF106 /* Fundamentals in Frameworks */,
 				0F44D3022D201BA900698999 /* Logger in Frameworks */,
+				0F5C70912D2067DC002EF106 /* OnboardingUI in Frameworks */,
 				0F5C6FC12D201CC9002EF106 /* SubscriptionDomain in Frameworks */,
 				0F5C6FD82D201D0C002EF106 /* Logger in Frameworks */,
 				0F5C6FD22D201CFB002EF106 /* HapticFeedbackFeature in Frameworks */,
@@ -79,6 +84,7 @@
 				0F5C6FC62D201CD7002EF106 /* SoundEffectFeature in Frameworks */,
 				0F5C6FBE2D201CC1002EF106 /* AnalyticsFeature in Frameworks */,
 				0F5C6FCF2D201CF3002EF106 /* Permission in Frameworks */,
+				0F5C70952D2068BD002EF106 /* Models in Frameworks */,
 				0F44D30B2D201BDA00698999 /* Permission in Frameworks */,
 				0F5C705D2D202764002EF106 /* EraGuessShared in Frameworks */,
 				0F44D2FC2D201B8B00698999 /* SharedUI in Frameworks */,
@@ -159,6 +165,9 @@
 				0F5C6FD72D201D0C002EF106 /* Logger */,
 				0F5C70532D2021BE002EF106 /* UINavigation */,
 				0F5C705C2D202764002EF106 /* EraGuessShared */,
+				0F5C70902D2067DC002EF106 /* OnboardingUI */,
+				0F5C70942D2068BD002EF106 /* Models */,
+				0F5C70BE2D2076A0002EF106 /* StateFeature */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -185,6 +194,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 0F44D2B32D200CC700698999;
 			minimizedProjectReferenceProxies = 1;
@@ -200,6 +210,9 @@
 				0F5C6FD62D201D0C002EF106 /* XCLocalSwiftPackageReference "Packages/Logger" */,
 				0F5C70522D2021BE002EF106 /* XCLocalSwiftPackageReference "Packages/UINavigation" */,
 				0F5C705B2D202764002EF106 /* XCLocalSwiftPackageReference "Packages/EraGuessShared" */,
+				0F5C708F2D2067DC002EF106 /* XCLocalSwiftPackageReference "Packages/OnboardingUI" */,
+				0F5C70932D2068BD002EF106 /* XCLocalSwiftPackageReference "Packages/Models" */,
+				0F5C70BD2D2076A0002EF106 /* XCLocalSwiftPackageReference "Packages/StateFeature" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
@@ -292,6 +305,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 			};
@@ -350,6 +364,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
@@ -506,6 +521,18 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/EraGuessShared;
 		};
+		0F5C708F2D2067DC002EF106 /* XCLocalSwiftPackageReference "Packages/OnboardingUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/OnboardingUI;
+		};
+		0F5C70932D2068BD002EF106 /* XCLocalSwiftPackageReference "Packages/Models" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Models;
+		};
+		0F5C70BD2D2076A0002EF106 /* XCLocalSwiftPackageReference "Packages/StateFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/StateFeature;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -604,6 +631,18 @@
 		0F5C705C2D202764002EF106 /* EraGuessShared */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EraGuessShared;
+		};
+		0F5C70902D2067DC002EF106 /* OnboardingUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OnboardingUI;
+		};
+		0F5C70942D2068BD002EF106 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
+		};
+		0F5C70BE2D2076A0002EF106 /* StateFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StateFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

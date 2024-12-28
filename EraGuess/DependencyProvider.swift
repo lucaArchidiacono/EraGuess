@@ -11,6 +11,7 @@ import EraGuessShared
 import HapticFeedbackFeature
 import Permission
 import SoundEffectFeature
+import StateFeature
 import SubscriptionDomain
 import SubscriptionFeature
 
@@ -28,6 +29,8 @@ protocol DependencyProviding {
     var subscriptionManager: SubscriptionManager { get }
     var analyticsManager: AnalyticsManager { get }
     var navigationManager: NavigationManager { get }
+    var userPreferenceManager: UserPreferencesManager { get }
+    var appStateManager: AppStateManager { get }
 }
 
 struct DependencyProvider: DependencyProviding {
@@ -43,6 +46,8 @@ struct DependencyProvider: DependencyProviding {
     let subscriptionManager: SubscriptionManager
     let analyticsManager: AnalyticsManager
     let navigationManager: NavigationManager
+    let userPreferenceManager: UserPreferencesManager
+    let appStateManager: AppStateManager
 
     init() {
         locationPermissionProvider = LocationPermissionProvider()
@@ -69,5 +74,8 @@ struct DependencyProvider: DependencyProviding {
         )
 
         navigationManager = NavigationManager()
+
+        userPreferenceManager = UserPreferencesManager()
+        appStateManager = AppStateManager()
     }
 }
