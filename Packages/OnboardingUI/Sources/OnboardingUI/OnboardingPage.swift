@@ -28,12 +28,7 @@ struct OnboardingPage: View {
         VStack {
             title
             list
-            if config.selections.isEmpty {
-                button
-            } else {
-                button
-                    .disabled(selected == nil)
-            }
+            button
         }
     }
 
@@ -48,31 +43,8 @@ struct OnboardingPage: View {
     var list: some View {
         List {
             Group {
-                ForEach(config.bulletPoints, id: \.self) { config in
-                    OnboardingBulletPoint(config: config)
-                }
-
-                if !config.selections.isEmpty {
-                    ForEach(config.selections, id: \.self) { selection in
-                        if let musicService = selection as? MusicService {
-                            SelectionCard(
-                                config: selectionConfig(for: musicService),
-                                isSelected: selected == selection,
-                                action: {
-                                    withAnimation(.spring(response: 0.3)) {
-                                        if selected == selection {
-                                            selected = nil
-                                            config.onSelection?(nil)
-                                        } else {
-                                            selected = musicService
-                                            config.onSelection?(musicService)
-                                        }
-                                    }
-                                }
-                            )
-                        }
-                    }
-                }
+                bulletPoints
+                selectionCards
             }
             .padding(.horizontal)
             .listRowSeparator(.hidden)
@@ -104,6 +76,35 @@ struct OnboardingPage: View {
         }
         .padding()
         .buttonStyle(.borderedProminent)
+        .disabled(!config.selections.isEmpty && selected == nil)
+    }
+
+    private var bulletPoints: some View {
+        ForEach(config.bulletPoints, id: \.self) { config in
+            OnboardingBulletPoint(config: config)
+        }
+    }
+
+    private var selectionCards: some View {
+        ForEach(config.selections, id: \.self) { selection in
+            if let musicService = selection as? MusicService {
+                SelectionCard(
+                    config: selectionConfig(for: musicService),
+                    isSelected: selected == selection,
+                    action: {
+                        withAnimation(.spring(response: 0.3)) {
+                            if selected == selection {
+                                selected = nil
+                                config.onSelection?(nil)
+                            } else {
+                                selected = musicService
+                                config.onSelection?(musicService)
+                            }
+                        }
+                    }
+                )
+            }
+        }
     }
 
     private func selectionConfig(for service: MusicService) -> SelectionCardConfig {
