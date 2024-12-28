@@ -1,6 +1,6 @@
 //
 //  SelectionCard.swift
-//  OnboardingUI
+//  EraGuessUI
 //
 //  Created by Luca Archidiacono on 28.12.2024.
 //

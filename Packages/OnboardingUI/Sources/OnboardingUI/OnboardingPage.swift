@@ -44,7 +44,6 @@ struct OnboardingPage: View {
         List {
             Group {
                 bulletPoints
-                selectionCards
             }
             .padding(.horizontal)
             .listRowSeparator(.hidden)
@@ -82,45 +81,6 @@ struct OnboardingPage: View {
     private var bulletPoints: some View {
         ForEach(config.bulletPoints, id: \.self) { config in
             OnboardingBulletPoint(config: config)
-        }
-    }
-
-    private var selectionCards: some View {
-        ForEach(config.selections, id: \.self) { selection in
-            if let musicService = selection as? MusicService {
-                SelectionCard(
-                    config: selectionConfig(for: musicService),
-                    isSelected: selected == selection,
-                    action: {
-                        withAnimation(.spring(response: 0.3)) {
-                            if selected == selection {
-                                selected = nil
-                                config.onSelection?(nil)
-                            } else {
-                                selected = musicService
-                                config.onSelection?(musicService)
-                            }
-                        }
-                    }
-                )
-            }
-        }
-    }
-
-    private func selectionConfig(for service: MusicService) -> SelectionCardConfig {
-        switch service {
-        case .appleMusic:
-            SelectionCardConfig(
-                imageName: "Apple Music",
-                title: "Apple Music",
-                description: "Use Apple Music to play songs. Requires an active Apple Music subscription."
-            )
-        case .spotify:
-            SelectionCardConfig(
-                imageName: "Spotify",
-                title: "Spotify",
-                description: "Use Spotify if you have an active subscription or want to use the free version."
-            )
         }
     }
 }

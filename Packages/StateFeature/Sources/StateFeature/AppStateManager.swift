@@ -2,7 +2,7 @@
 //  AppStateManager.swift
 //  StateFeature
 //
-//  Created by DG-SM-8669 on 28.12.2024.
+//  Created by Luca Archidiacono on 28.12.2024.
 //
 
 import Foundation

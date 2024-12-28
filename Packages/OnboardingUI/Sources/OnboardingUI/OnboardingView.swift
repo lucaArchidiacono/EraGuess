@@ -9,7 +9,6 @@ import AnalyticsDomain
 import Foundation
 import Models
 import Permission
-import StateFeature
 import SwiftUI
 
 @MainActor
@@ -20,19 +19,16 @@ public struct OnboardingView: View {
     @State private var pageConfigs: [OnboardingPageConfig] = []
     @State private var hasSeenOnboarding: Bool = false
 
-    private let userPreferencesManager: UserPreferencesManager
     private let analyticsManager: AnalyticsManager
     private let notificationPermissionProvider: NotificationPermissionProvider
 
     private let onDismiss: () -> Void
 
     public init(
-        userPrereferencesManager: UserPreferencesManager,
         analyticsManager: AnalyticsManager,
         notificationPermissionProvider: NotificationPermissionProvider,
         onDismiss: @escaping () -> Void
     ) {
-        userPreferencesManager = userPrereferencesManager
         self.analyticsManager = analyticsManager
         self.notificationPermissionProvider = notificationPermissionProvider
         self.onDismiss = onDismiss
@@ -67,14 +63,14 @@ extension OnboardingView {
     }
 
     private func setupOnboardingPages() {
-        let firstPage = OnboardingPageConfig(
+        let welcomePage = OnboardingPageConfig(
             title: "Welcome to EraGuess!",
             bulletPoints: [
                 .init(
                     imageName: "music.note",
                     title: "Play music and guess the era",
                     description: """
-                    Listen to the music and guess the era it was released in.
+                    Listen to a preview of the music and guess the year it was released in.
                     """
                 ),
                 .init(
@@ -84,55 +80,71 @@ extension OnboardingView {
                     Play with multiple friends or by yourself.
                     """
                 ),
+                .init(
+                    imageName: "trophy.fill",
+                    title: "Compete and earn points",
+                    description: """
+                    Earn points by correctly guessing the year, artist name, and song title.
+                    """
+                ),
             ],
             buttonTitle: "Continue",
             onAction: goToNextPage(using:)
         )
+        pageConfigs.append(welcomePage)
 
-        pageConfigs.append(firstPage)
-
-        let secondPage = OnboardingPageConfig(
-            title: "Select your Music Player",
+        let rulesPage = OnboardingPageConfig(
+            title: "How to Play",
             bulletPoints: [
                 .init(
-                    imageName: "music.quarternote.3",
-                    title: "Choose your preferred music service",
+                    imageName: "play.circle.fill",
+                    title: "Listen to the Preview",
                     description: """
-                    Select your preferred music service to play music.
+                    Each round starts with a short preview of a song. Pay attention to the style and sound!
+                    """
+                ),
+                .init(
+                    imageName: "calendar",
+                    title: "Place on Timeline",
+                    description: """
+                    Place the song on the timeline between two reference tracks. The closer you get to the actual release year, the more points you earn.
+                    """
+                ),
+                .init(
+                    imageName: "music.mic",
+                    title: "Bonus Points",
+                    description: """
+                    Get extra points by correctly guessing the artist's name and song title.
+                    """
+                ),
+                .init(
+                    imageName: "checkmark.circle.fill",
+                    title: "Win the Game",
+                    description: """
+                    First player to correctly guess 10 songs wins! Incorrect guesses don't count towards your progress.
+                    """
+                ),
+                .init(
+                    imageName: "arrow.triangle.2.circlepath",
+                    title: "Taking Turns",
+                    description: """
+                    Players take turns guessing. If you guess incorrectly, the song is discarded and it's the next player's turn.
                     """
                 ),
             ],
-            selections: MusicService.allCases.map { $0 as AnyHashable },
-            onSelection: { selection in
-                if let musicService = selection as? MusicService {
-                    userPreferencesManager.$preferredMusicService.withLock { $0 = musicService }
-                }
-            },
-            buttonTitle: "Get Started",
-            onAction: { completion in
-                guard let musicService = userPreferencesManager.preferredMusicService else {
-                    return
-                }
-
-                switch musicService {
-                case .appleMusic:
-                    print("Setup Apple Music")
-                case .spotify:
-                    print("Setup Spotify")
-                }
-
-                hasSeenOnboarding = true
-                goToNextPage(using: completion)
-            }
+            buttonTitle: "Let's Play",
+            onAction: goToNextPage(using:)
         )
-
-        pageConfigs.append(secondPage)
+        pageConfigs.append(rulesPage)
     }
 
     private func goToNextPage(using completion: @escaping () -> Void) {
         completion()
 
-        guard pageConfigs.count > currentIndex else { return }
+        guard pageConfigs.count - 1 > currentIndex else {
+            hasSeenOnboarding = true
+            return
+        }
 
         currentIndex += 1
     }

@@ -5,22 +5,26 @@
 //  Created by Luca Archidiacono on 28.12.2024.
 //
 
+import AnalyticsDomain
 import OnboardingUI
+import Permission
+import StateFeature
 import SwiftUI
 
 struct ContentView: View {
     let dependencyProvider: DependencyProviding
 
-    @State private var showOnboarding: Bool = false
+    private var appStateManager: AppStateManager { dependencyProvider.appStateManager }
+    private var analyticsManager: AnalyticsManager { dependencyProvider.analyticsManager }
+    private var notificationPermissionProvider: NotificationPermissionProvider { dependencyProvider.notificationPermissionProvider }
 
     var body: some View {
         appView
-            .sheet(isPresented: $showOnboarding) {
+            .sheet(
+                isPresented: .constant(!appStateManager.hasSeenOnboarding)
+            ) {
                 onboardingFeature
                     .interactiveDismissDisabled(true)
-            }
-            .onAppear {
-                showOnboarding = !dependencyProvider.appStateManager.hasSeenOnboarding
             }
     }
 
@@ -32,12 +36,10 @@ struct ContentView: View {
 extension ContentView {
     private var onboardingFeature: some View {
         OnboardingView(
-            userPrereferencesManager: dependencyProvider.userPreferenceManager,
-            analyticsManager: dependencyProvider.analyticsManager,
-            notificationPermissionProvider: dependencyProvider.notificationPermissionProvider,
+            analyticsManager: analyticsManager,
+            notificationPermissionProvider: notificationPermissionProvider,
             onDismiss: {
-                dependencyProvider.appStateManager.$hasSeenOnboarding.withLock { $0 = true }
-                showOnboarding = false
+                appStateManager.$hasSeenOnboarding.withLock { $0 = true }
             }
         )
     }
