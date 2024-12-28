@@ -12,11 +12,9 @@ import StateFeature
 import SwiftUI
 
 struct ContentView: View {
-    let dependencyProvider: DependencyProviding
-
-    private var appStateManager: AppStateManager { dependencyProvider.appStateManager }
-    private var analyticsManager: AnalyticsManager { dependencyProvider.analyticsManager }
-    private var notificationPermissionProvider: NotificationPermissionProvider { dependencyProvider.notificationPermissionProvider }
+    let appStateManager: AppStateManager
+    let analyticsManager: AnalyticsManager
+    let notificationPermissionProvider: NotificationPermissionProvider
 
     var body: some View {
         appView
