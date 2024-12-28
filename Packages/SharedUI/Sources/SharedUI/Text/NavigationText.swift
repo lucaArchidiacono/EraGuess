@@ -1,6 +1,6 @@
 //
 //  NavigationText.swift
-//  CasaZurigoUI
+//  SharedUI
 //
 //  Created by Luca Archidiacono on 24.12.2024.
 //

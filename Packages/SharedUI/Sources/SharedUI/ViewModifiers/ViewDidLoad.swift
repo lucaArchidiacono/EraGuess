@@ -1,6 +1,6 @@
 //
 //  ViewDidLoad.swift
-//  CasaZurigoUI
+//  SharedUI
 //
 //  Created by Luca Archidiacono on 15.12.2024.
 //

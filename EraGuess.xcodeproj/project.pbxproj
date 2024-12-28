@@ -30,15 +30,29 @@
 		0F5C6FD52D201D03002EF106 /* Fundamentals in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FD42D201D03002EF106 /* Fundamentals */; };
 		0F5C6FD82D201D0C002EF106 /* Logger in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C6FD72D201D0C002EF106 /* Logger */; };
 		0F5C70542D2021BE002EF106 /* UINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70532D2021BE002EF106 /* UINavigation */; };
+		0F5C705D2D202764002EF106 /* EraGuessShared in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C705C2D202764002EF106 /* EraGuessShared */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F44D2BC2D200CC700698999 /* EraGuess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EraGuess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0F5C70652D2032A7002EF106 /* Exceptions for "EraGuess" folder in "EraGuess" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 0F44D2BB2D200CC700698999 /* EraGuess */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0F44D2BE2D200CC700698999 /* EraGuess */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0F5C70652D2032A7002EF106 /* Exceptions for "EraGuess" folder in "EraGuess" target */,
+			);
 			path = EraGuess;
 			sourceTree = "<group>";
 		};
@@ -66,6 +80,7 @@
 				0F5C6FBE2D201CC1002EF106 /* AnalyticsFeature in Frameworks */,
 				0F5C6FCF2D201CF3002EF106 /* Permission in Frameworks */,
 				0F44D30B2D201BDA00698999 /* Permission in Frameworks */,
+				0F5C705D2D202764002EF106 /* EraGuessShared in Frameworks */,
 				0F44D2FC2D201B8B00698999 /* SharedUI in Frameworks */,
 				0F44D30E2D201C3400698999 /* AnalyticsDomain in Frameworks */,
 				0F44D3102D201C3400698999 /* AnalyticsFeature in Frameworks */,
@@ -143,6 +158,7 @@
 				0F5C6FD42D201D03002EF106 /* Fundamentals */,
 				0F5C6FD72D201D0C002EF106 /* Logger */,
 				0F5C70532D2021BE002EF106 /* UINavigation */,
+				0F5C705C2D202764002EF106 /* EraGuessShared */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -183,6 +199,7 @@
 				0F5C6FD32D201D03002EF106 /* XCLocalSwiftPackageReference "Packages/Fundamentals" */,
 				0F5C6FD62D201D0C002EF106 /* XCLocalSwiftPackageReference "Packages/Logger" */,
 				0F5C70522D2021BE002EF106 /* XCLocalSwiftPackageReference "Packages/UINavigation" */,
+				0F5C705B2D202764002EF106 /* XCLocalSwiftPackageReference "Packages/EraGuessShared" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
@@ -217,6 +234,8 @@
 /* Begin XCBuildConfiguration section */
 		0F44D2C92D200CCA00698999 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 0F44D2BE2D200CC700698999 /* EraGuess */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -267,17 +286,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		0F44D2CA2D200CCA00698999 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 0F44D2BE2D200CC700698999 /* EraGuess */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -322,10 +345,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -342,6 +367,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EraGuess/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -381,6 +408,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EraGuess/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -470,6 +499,10 @@
 		0F5C70522D2021BE002EF106 /* XCLocalSwiftPackageReference "Packages/UINavigation" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/UINavigation;
+		};
+		0F5C705B2D202764002EF106 /* XCLocalSwiftPackageReference "Packages/EraGuessShared" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/EraGuessShared;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -565,6 +598,10 @@
 		0F5C70532D2021BE002EF106 /* UINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UINavigation;
+		};
+		0F5C705C2D202764002EF106 /* EraGuessShared */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EraGuessShared;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,0 +1,21 @@
+//
+//  Config.xcconfig
+//  EraGuess
+//
+//  Created by Luca Archidiacono on 28.12.2024.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// RevenueCat Key
+REVENUE_CAT_KEY = appl_gygDtSDZXzYorswVpXWdAKKYJFj
+
+// Bundle ID
+APPLICATION_IDENTIFIER = dev.lucaa.EraGuess
+
+// Shared container security group ID
+SECURITY_GROUP_IDENTIFIER = group.dev.lucaa.EraGuess
+
+// TelemetryDeck
+TELEMETRYDECK_KEY = F6C40776-F7DB-43A2-820A-8E6684D1AB56

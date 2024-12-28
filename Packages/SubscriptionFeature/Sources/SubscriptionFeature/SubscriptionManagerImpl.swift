@@ -1,6 +1,6 @@
 //
 //  SubscriptionManagerImpl.swift
-//  CasaZurigo
+//  SubscriptionFeature
 //
 //  Created by Luca Archidiacono on 25.05.2024.
 //

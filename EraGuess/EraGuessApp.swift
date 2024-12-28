@@ -2,16 +2,42 @@
 //  EraGuessApp.swift
 //  EraGuess
 //
-//  Created by DG-SM-8669 on 28.12.2024.
+//  Created by Luca Archidiacono on 28.12.2024.
 //
 
+import Logger
 import SwiftUI
 
 @main
 struct EraGuessApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) private var scenePhase
+
+    private let logger = Logger(label: String(describing: EraGuessApp.self))
+
+    private var dependencyProvider: DependencyProvider {
+        appDelegate.dependencyProvider
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onChange(of: scenePhase, initial: true) { _, _ in
+                }
+        }
+    }
+
+    private func handleScenePhase(_ phase: ScenePhase) {
+        switch phase {
+        case .background:
+            logger.debug("BACKGROUND")
+        case .active:
+            logger.debug("ACTIVE")
+            dependencyProvider.analyticsManager.track(event: .state(.active))
+        case .inactive:
+            logger.debug("INACTIVE")
+        @unknown default:
+            fatalError("Case \(scenePhase) not handeled!")
         }
     }
 }

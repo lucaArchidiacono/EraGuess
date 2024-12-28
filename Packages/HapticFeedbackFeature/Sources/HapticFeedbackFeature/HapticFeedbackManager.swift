@@ -1,6 +1,6 @@
 //
 //  HapticFeedbackManager.swift
-//  CasaZurigo
+//  HapticFeedbackFeature
 //
 //  Created by Luca Archidiacono on 17.09.23.
 //

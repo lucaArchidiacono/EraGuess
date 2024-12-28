@@ -1,6 +1,6 @@
 //
 //  SoundEffectManager.swift
-//  CasaZurigo
+//  SoundEffectFeature
 //
 //  Created by Luca Archidiacono on 17.09.23.
 //
