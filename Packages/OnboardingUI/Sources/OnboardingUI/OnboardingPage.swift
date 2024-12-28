@@ -28,7 +28,12 @@ struct OnboardingPage: View {
         VStack {
             title
             list
-            button
+            if config.selections.isEmpty {
+                button
+            } else {
+                button
+                    .disabled(selected == nil)
+            }
         }
     }
 
@@ -55,8 +60,13 @@ struct OnboardingPage: View {
                                 isSelected: selected == selection,
                                 action: {
                                     withAnimation(.spring(response: 0.3)) {
-                                        selected = musicService
-                                        config.onSelection?(musicService)
+                                        if selected == selection {
+                                            selected = nil
+                                            config.onSelection?(nil)
+                                        } else {
+                                            selected = musicService
+                                            config.onSelection?(musicService)
+                                        }
                                     }
                                 }
                             )
