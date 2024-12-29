@@ -6,6 +6,7 @@
 //
 
 import HomeUI
+import SettingsUI
 import SwiftUI
 import UINavigation
 
@@ -15,6 +16,7 @@ final class NavigationManager {
     // MARK: - Routers
 
     var homeRouter = Router<HomeUI.Destination, HomeUI.Page>()
+    var settingsRouter = Router<SettingsUI.Destination, SettingsUI.Page>()
 
     init() {}
 }

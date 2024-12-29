@@ -10,6 +10,7 @@ import AnalyticsFeature
 import EraGuessShared
 import HapticFeedbackFeature
 import Permission
+import Services
 import SoundEffectFeature
 import StateFeature
 import SubscriptionDomain
@@ -38,6 +39,7 @@ struct DependencyProvider: DependencyProviding {
 
     let locationPermissionProvider: LocationPermissionProvider
     let notificationPermissionProvider: NotificationPermissionProvider
+    let musicKitPermissionProvider: MusicKitPermissionProvider
 
     // MARK: - Managers
 
@@ -49,9 +51,15 @@ struct DependencyProvider: DependencyProviding {
     let userPreferenceManager: UserPreferencesManager
     let appStateManager: AppStateManager
 
+    // MARK: - Services
+
+    let catalogSongService: CatalogSongService
+    let streamingService: StreamingService
+
     init() {
         locationPermissionProvider = LocationPermissionProvider()
         notificationPermissionProvider = NotificationPermissionProvider()
+        musicKitPermissionProvider = MusicKitPermissionProvider()
 
         hapticFeedbackManager = HapticFeedbackManager()
         soundEffectManager = SoundEffectManager()
@@ -77,5 +85,9 @@ struct DependencyProvider: DependencyProviding {
 
         userPreferenceManager = UserPreferencesManager()
         appStateManager = AppStateManager()
+
+        let playerService = PlayerService()
+        catalogSongService = CatalogSongServiceImpl()
+        streamingService = AppleMusicService(playerService: playerService)
     }
 }

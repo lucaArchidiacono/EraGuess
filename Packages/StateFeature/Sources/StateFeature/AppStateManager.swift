@@ -6,13 +6,19 @@
 //
 
 import Foundation
+import Models
 import Sharing
 import SwiftUI
 
 @Observable
 public final class AppStateManager {
     @ObservationIgnored
-    @Shared(.appStorage("hasSeenOnboarding")) public var hasSeenOnboarding: Bool = false
+    @Shared(.appStorage("hasSeenOnboarding"))
+    public var hasSeenOnboarding: Bool = false
+
+    @ObservationIgnored
+    @Shared(.inMemory("selectedLanguageSet"))
+    public var availableLanguageSet: Set<LanguageSet> = [.enDe]
 
     public init() {}
 }

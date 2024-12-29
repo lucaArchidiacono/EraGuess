@@ -22,11 +22,7 @@ public struct SettingsToolbar: ToolbarContent {
 
     public var body: some ToolbarContent {
         ToolbarItem(placement: placement) {
-            Button {
-                onTap()
-            } label: {
-                Image(systemName: "gear")
-            }
+            SettingsButton(onTap: onTap)
         }
     }
 }

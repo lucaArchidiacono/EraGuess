@@ -6,10 +6,14 @@
 //
 
 import AnalyticsDomain
+import EmailFeatureUI
+import GameUI
 import HapticFeedbackFeature
 import HomeUI
 import OnboardingUI
 import Permission
+import Services
+import SettingsUI
 import StateFeature
 import SwiftUI
 
@@ -19,7 +23,10 @@ struct ContentView: View {
     let appStateManager: AppStateManager
     let analyticsManager: AnalyticsManager
     let notificationPermissionProvider: NotificationPermissionProvider
+    let musicKitPermissionProvider: MusicKitPermissionProvider
     let hapticFeedbackManager: HapticFeedbackManager
+    let catalogSongService: CatalogSongService
+    let streamingService: StreamingService
 
     var body: some View {
         appView
@@ -55,10 +62,10 @@ extension ContentView {
                 router: navigationManager.homeRouter,
                 hapticFeedbackManager: hapticFeedbackManager
             )
+            .navigationDestination(for: HomeUI.Destination.self, destination: handle(_:))
+            .sheet(item: $navigationManager.homeRouter.sheet, content: handle(_:))
+            .fullScreenCover(item: $navigationManager.homeRouter.fullScreen, content: handle(_:))
         }
-        .navigationDestination(for: HomeUI.Destination.self, destination: handle(_:))
-        .sheet(item: $navigationManager.homeRouter.sheet, content: handle(_:))
-        .fullScreenCover(item: $navigationManager.homeRouter.fullScreen, content: handle(_:))
     }
 
     @ViewBuilder
@@ -73,11 +80,65 @@ extension ContentView {
     private func handle(_ page: HomeUI.Page) -> some View {
         switch page {
         case .settings:
-            EmptyView()
+            settingsFeature
         case .subscription:
             EmptyView()
         case .game:
-            Text("Game")
+            gameFeature
+        }
+    }
+}
+
+extension ContentView {
+    private var gameFeature: some View {
+        GameView(
+            appStateManager: appStateManager,
+            catalogSongService: catalogSongService,
+            streamingService: streamingService
+        )
+    }
+}
+
+extension ContentView {
+    private var settingsFeature: some View {
+        NavigationStack(path: $navigationManager.settingsRouter.path) {
+            SettingsView(
+                router: navigationManager.settingsRouter,
+                musicKitPermissionProvider: musicKitPermissionProvider
+            )
+            .navigationDestination(for: SettingsUI.Destination.self, destination: handle(_:))
+            .sheet(item: $navigationManager.settingsRouter.sheet, content: handle(_:))
+            .fullScreenCover(item: $navigationManager.settingsRouter.fullScreen, content: handle(_:))
+        }
+    }
+
+    @ViewBuilder
+    private func handle(_ destination: SettingsUI.Destination) -> some View {
+        switch destination {
+        case .feedback:
+            FeedbackView(
+                router: navigationManager.settingsRouter,
+                analyticsManager: analyticsManager
+            )
+        case .privacy:
+            PrivacyView(
+                analyticsManager: analyticsManager
+            )
+        case .termsOfUse:
+            TermsOfUseView(
+                analyticsManager: analyticsManager
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func handle(_ page: SettingsUI.Page) -> some View {
+        switch page {
+        case let .email(data):
+            AppleMailView(
+                emailData: data,
+                analyticsManager: analyticsManager
+            )
         }
     }
 }

@@ -7,18 +7,43 @@
 
 import SwiftUI
 
-struct SelectionCardConfig {
-    let imageName: String
+public struct SelectionCardConfig {
+    public enum Header {
+        case text(String)
+        case image(Image)
+    }
+
+    let header: Header?
     let title: String
     let description: String
+
+    public init(
+        header: Header? = nil,
+        title: String,
+        description: String
+    ) {
+        self.header = header
+        self.title = title
+        self.description = description
+    }
 }
 
-struct SelectionCard: View {
+public struct SelectionCard: View {
     let config: SelectionCardConfig
     let isSelected: Bool
     let action: () -> Void
 
-    var body: some View {
+    public init(
+        config: SelectionCardConfig,
+        isSelected: Bool,
+        action: @escaping () -> Void
+    ) {
+        self.config = config
+        self.isSelected = isSelected
+        self.action = action
+    }
+
+    public var body: some View {
         Button(action: action) {
             ZStack {
                 // Background
@@ -27,12 +52,20 @@ struct SelectionCard: View {
 
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(alignment: .top) {
-                        Image(config.imageName, bundle: .module)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(.primary)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 32, height: 32)
+                        if let header = config.header {
+                            switch header {
+                            case let .text(string):
+                                Text(string)
+                                    .font(.headline)
+                            case let .image(image):
+                                image
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundStyle(.primary)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 32, height: 32)
+                            }
+                        }
 
                         Spacer()
 
@@ -48,7 +81,7 @@ struct SelectionCard: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text(config.title)
-                            .font(.headline)
+                            .font(.title3)
 
                         Text(config.description)
                             .font(.subheadline)
@@ -73,17 +106,17 @@ struct SelectionCard: View {
 import Models
 
 #Preview {
-    HStack {
-        Spacer()
+    List {
         SelectionCard(
             config: .init(
-                imageName: "Spotify",
-                title: "Spotfiy",
-                description: "Select Spotify if you have a subscription or want to use the free version."
+                header: .text("DE-EN"),
+                title: "English/German Music",
+                description: "Listen to a preview of the music and guess the era it was released in."
             ),
             isSelected: true,
             action: {}
         )
-        Spacer()
+        .listRowSeparator(.hidden)
     }
+    .listStyle(.plain)
 }

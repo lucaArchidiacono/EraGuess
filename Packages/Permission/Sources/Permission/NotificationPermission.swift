@@ -11,7 +11,7 @@ import UIKit
 import UserNotifications
 
 public final class NotificationPermissionProvider: PermissionProvider, Sendable {
-    private let logger = Logger(label: "NotificationPermissionProvider")
+    private let logger = Logger(label: String(describing: NotificationPermissionProvider.self))
 
     private var requestTask: Task<Permission.Status, Never>?
 

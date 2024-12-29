@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0410A12D219F8A009F9ADD /* SettingsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0410A02D219F8A009F9ADD /* SettingsUI */; };
+		0F0410A52D219FE7009F9ADD /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0410A42D219FE7009F9ADD /* Services */; };
+		0F0410A92D21BC30009F9ADD /* GameUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0410A82D21BC30009F9ADD /* GameUI */; };
+		0F0410DB2D21D40E009F9ADD /* EmailFeatureUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0410DA2D21D40E009F9ADD /* EmailFeatureUI */; };
 		0F44D2F42D201B5E00698999 /* SubscriptionDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2F32D201B5E00698999 /* SubscriptionDomain */; };
 		0F44D2F62D201B5E00698999 /* SubscriptionFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2F52D201B5E00698999 /* SubscriptionFeature */; };
 		0F44D2F92D201B8100698999 /* SoundEffectFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F44D2F82D201B8100698999 /* SoundEffectFeature */; };
@@ -72,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F0410DB2D21D40E009F9ADD /* EmailFeatureUI in Frameworks */,
+				0F0410A52D219FE7009F9ADD /* Services in Frameworks */,
 				0F5C70BF2D2076A0002EF106 /* StateFeature in Frameworks */,
 				0F5C6FCC2D201CE9002EF106 /* REST in Frameworks */,
 				0F5C6FD52D201D03002EF106 /* Fundamentals in Frameworks */,
@@ -90,6 +96,7 @@
 				0F5C705D2D202764002EF106 /* EraGuessShared in Frameworks */,
 				0F44D2FC2D201B8B00698999 /* SharedUI in Frameworks */,
 				0F44D30E2D201C3400698999 /* AnalyticsDomain in Frameworks */,
+				0F0410A92D21BC30009F9ADD /* GameUI in Frameworks */,
 				0F44D3102D201C3400698999 /* AnalyticsFeature in Frameworks */,
 				0F44D2F42D201B5E00698999 /* SubscriptionDomain in Frameworks */,
 				0F44D2F92D201B8100698999 /* SoundEffectFeature in Frameworks */,
@@ -100,6 +107,7 @@
 				0F5C6FC92D201CE0002EF106 /* SharedUI in Frameworks */,
 				0F44D3082D201BC100698999 /* HapticFeedbackFeature in Frameworks */,
 				0F5C6FBC2D201CC1002EF106 /* AnalyticsDomain in Frameworks */,
+				0F0410A12D219F8A009F9ADD /* SettingsUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +179,10 @@
 				0F5C70942D2068BD002EF106 /* Models */,
 				0F5C70BE2D2076A0002EF106 /* StateFeature */,
 				0F7FCB5D2D20A02500D07E8D /* HomeUI */,
+				0F0410A02D219F8A009F9ADD /* SettingsUI */,
+				0F0410A42D219FE7009F9ADD /* Services */,
+				0F0410A82D21BC30009F9ADD /* GameUI */,
+				0F0410DA2D21D40E009F9ADD /* EmailFeatureUI */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -197,7 +209,6 @@
 			knownRegions = (
 				en,
 				Base,
-				de,
 			);
 			mainGroup = 0F44D2B32D200CC700698999;
 			minimizedProjectReferenceProxies = 1;
@@ -217,6 +228,10 @@
 				0F5C70932D2068BD002EF106 /* XCLocalSwiftPackageReference "Packages/Models" */,
 				0F5C70BD2D2076A0002EF106 /* XCLocalSwiftPackageReference "Packages/StateFeature" */,
 				0F7FCB5C2D20A02500D07E8D /* XCLocalSwiftPackageReference "Packages/HomeUI" */,
+				0F04109F2D219F8A009F9ADD /* XCLocalSwiftPackageReference "Packages/SettingsUI" */,
+				0F0410A32D219FE7009F9ADD /* XCLocalSwiftPackageReference "Packages/Services" */,
+				0F0410A72D21BC30009F9ADD /* XCLocalSwiftPackageReference "Packages/GameUI" */,
+				0F0410D92D21D40D009F9ADD /* XCLocalSwiftPackageReference "Packages/EmailFeatureUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
@@ -481,6 +496,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		0F04109F2D219F8A009F9ADD /* XCLocalSwiftPackageReference "Packages/SettingsUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SettingsUI;
+		};
+		0F0410A32D219FE7009F9ADD /* XCLocalSwiftPackageReference "Packages/Services" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Services;
+		};
+		0F0410A72D21BC30009F9ADD /* XCLocalSwiftPackageReference "Packages/GameUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/GameUI;
+		};
+		0F0410D92D21D40D009F9ADD /* XCLocalSwiftPackageReference "Packages/EmailFeatureUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/EmailFeatureUI;
+		};
 		0F5C6FBA2D201CC1002EF106 /* XCLocalSwiftPackageReference "Packages/AnalyticsFeature" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/AnalyticsFeature;
@@ -544,6 +575,22 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0F0410A02D219F8A009F9ADD /* SettingsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SettingsUI;
+		};
+		0F0410A42D219FE7009F9ADD /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
+		};
+		0F0410A82D21BC30009F9ADD /* GameUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GameUI;
+		};
+		0F0410DA2D21D40E009F9ADD /* EmailFeatureUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EmailFeatureUI;
+		};
 		0F44D2F32D201B5E00698999 /* SubscriptionDomain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SubscriptionDomain;

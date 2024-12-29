@@ -25,6 +25,9 @@ public struct HomeView: View {
 
     public var body: some View {
         content
+            .toolbar {
+                HomeToolbar()
+            }
             .environment(router)
     }
 

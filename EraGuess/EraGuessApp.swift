@@ -26,7 +26,10 @@ struct EraGuessApp: App {
                 appStateManager: dependencyProvider.appStateManager,
                 analyticsManager: dependencyProvider.analyticsManager,
                 notificationPermissionProvider: dependencyProvider.notificationPermissionProvider,
-                hapticFeedbackManager: dependencyProvider.hapticFeedbackManager
+                musicKitPermissionProvider: dependencyProvider.musicKitPermissionProvider,
+                hapticFeedbackManager: dependencyProvider.hapticFeedbackManager,
+                catalogSongService: dependencyProvider.catalogSongService,
+                streamingService: dependencyProvider.streamingService
             )
             .onChange(of: scenePhase, initial: true) { _, newValue in
                 handleScenePhase(newValue)
