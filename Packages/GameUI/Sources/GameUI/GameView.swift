@@ -20,19 +20,19 @@ public struct GameView: View {
     @State private var appStateManager: AppStateManager
 
     private let catalogSongService: CatalogSongService
-    private let streamingService: StreamingService
+    private let streamingServiceRepository: StreamingServiceRepository
     private let analyticsManager: AnalyticsManager
 
     public init(
         appStateManager: AppStateManager,
         catalogSongService: CatalogSongService,
-        streamingService: StreamingService,
+        streamingServiceRepository: StreamingServiceRepository,
         analyticsManager: AnalyticsManager
     ) {
         _appStateManager = State(wrappedValue: appStateManager)
 
         self.catalogSongService = catalogSongService
-        self.streamingService = streamingService
+        self.streamingServiceRepository = streamingServiceRepository
         self.analyticsManager = analyticsManager
     }
 
@@ -104,13 +104,13 @@ public struct GameView: View {
             Button(catalogSong.title) {
                 Task {
                     do {
-                        if await streamingService.isPlaying {
-                            try await streamingService.stop()
+                        if await streamingServiceRepository.isPlaying {
+                            await streamingServiceRepository.stop()
                         }
 
-                        let streamableSongs = try await streamingService.searchSongs(query: catalogSong.title)
+                        let streamableSongs = try await streamingServiceRepository.searchSongs(query: catalogSong.title)
                         guard let streamableSong = streamableSongs.first else { return }
-                        try await streamingService.play(song: streamableSong)
+                        try await streamingServiceRepository.play(song: streamableSong)
                     } catch {
                         logger.error("Failed to search songs: \(error)")
                     }

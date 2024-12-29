@@ -12,9 +12,5 @@ enum StreamingServiceError: Error {
 }
 
 public protocol StreamingService: Sendable {
-    var isPlaying: Bool { get async }
     func searchSongs(query: String) async throws -> [StreamableSong]
-    func play(song: StreamableSong) async throws
-    func pause() async throws
-    func stop() async throws
 }

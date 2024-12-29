@@ -26,7 +26,7 @@ struct ContentView: View {
     let musicKitPermissionProvider: MusicKitPermissionProvider
     let hapticFeedbackManager: HapticFeedbackManager
     let catalogSongService: CatalogSongService
-    let streamingService: StreamingService
+    let streamingServiceRepository: StreamingServiceRepository
 
     var body: some View {
         appView
@@ -96,7 +96,7 @@ extension ContentView {
             GameView(
                 appStateManager: appStateManager,
                 catalogSongService: catalogSongService,
-                streamingService: streamingService,
+                streamingServiceRepository: streamingServiceRepository,
                 analyticsManager: analyticsManager
             )
         }

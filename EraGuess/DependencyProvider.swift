@@ -54,7 +54,7 @@ struct DependencyProvider: DependencyProviding {
     // MARK: - Services
 
     let catalogSongService: CatalogSongService
-    let streamingService: StreamingService
+    let streamingServiceRepository: StreamingServiceRepository
 
     init() {
         locationPermissionProvider = LocationPermissionProvider()
@@ -86,8 +86,16 @@ struct DependencyProvider: DependencyProviding {
         userPreferenceManager = UserPreferencesManager()
         appStateManager = AppStateManager()
 
-        let playerService = PlayerService()
         catalogSongService = CatalogSongServiceImpl()
-        streamingService = AppleMusicService(playerService: playerService)
+
+        let appleMusicService = AppleMusicService()
+        let spotifyService = SpotifyService()
+        let playerService = PlayerService()
+
+        streamingServiceRepository = StreamingServiceRepository(
+            appleMusicService: appleMusicService,
+            spotifyService: spotifyService,
+            playerService: playerService
+        )
     }
 }
