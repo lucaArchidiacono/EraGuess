@@ -18,17 +18,21 @@ public struct PrivacyView: View {
     }
 
     public var body: some View {
+        content
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Privacy Policy")
+            .onAppear {
+                analyticsManager.track(
+                    event: .view(
+                        name: String(describing: PrivacyView.self)
+                    )
+                )
+            }
+    }
+
+    private var content: some View {
         List {
             infoCard
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Privacy Policy")
-        .onAppear {
-            analyticsManager.track(
-                event: .view(
-                    name: String(describing: PrivacyView.self)
-                )
-            )
         }
     }
 

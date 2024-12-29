@@ -28,18 +28,22 @@ public struct FeedbackView: View {
     }
 
     public var body: some View {
+        content
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Feedback & Support")
+            .onAppear {
+                analyticsManager.track(
+                    event: .view(
+                        name: String(describing: FeedbackView.self)
+                    )
+                )
+            }
+    }
+
+    private var content: some View {
         List {
             infoCard
             customerSupportSection
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Feedback & Support")
-        .onAppear {
-            analyticsManager.track(
-                event: .view(
-                    name: String(describing: FeedbackView.self)
-                )
-            )
         }
     }
 

@@ -5,6 +5,7 @@
 //  Created by Luca Archidiacono on 28.12.2024.
 //
 
+import AnalyticsDomain
 import HapticFeedbackFeature
 import SwiftUI
 import UINavigation
@@ -13,14 +14,17 @@ public struct HomeView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     private let router: Router<HomeUI.Destination, HomeUI.Page>
+    private let analyticsManager: AnalyticsManager
     private let hapticFeedbackManager: HapticFeedbackManager
 
     public init(
         router: Router<HomeUI.Destination, HomeUI.Page>,
-        hapticFeedbackManager: HapticFeedbackManager
+        hapticFeedbackManager: HapticFeedbackManager,
+        analyticsManager: AnalyticsManager
     ) {
         self.router = router
         self.hapticFeedbackManager = hapticFeedbackManager
+        self.analyticsManager = analyticsManager
     }
 
     public var body: some View {
@@ -29,6 +33,13 @@ public struct HomeView: View {
                 HomeToolbar()
             }
             .environment(router)
+            .onAppear {
+                analyticsManager.track(
+                    event: .view(
+                        name: String(describing: HomeView.self)
+                    )
+                )
+            }
     }
 
     private var content: some View {

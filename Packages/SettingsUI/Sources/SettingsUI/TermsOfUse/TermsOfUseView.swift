@@ -19,12 +19,22 @@ public struct TermsOfUseView: View {
     }
 
     public var body: some View {
+        content
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Terms of Use")
+            .onAppear {
+                analyticsManager.track(
+                    event: .view(
+                        name: String(describing: TermsOfUseView.self)
+                    )
+                )
+            }
+    }
+
+    private var content: some View {
         List {
             infoCard
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Terms of Use")
-        .onAppear {}
     }
 
     private var infoCard: some View {

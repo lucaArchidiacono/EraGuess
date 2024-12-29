@@ -21,20 +21,30 @@ public struct GameView: View {
 
     private let catalogSongService: CatalogSongService
     private let streamingService: StreamingService
+    private let analyticsManager: AnalyticsManager
 
     public init(
         appStateManager: AppStateManager,
         catalogSongService: CatalogSongService,
-        streamingService: StreamingService
+        streamingService: StreamingService,
+        analyticsManager: AnalyticsManager
     ) {
         _appStateManager = State(wrappedValue: appStateManager)
 
         self.catalogSongService = catalogSongService
         self.streamingService = streamingService
+        self.analyticsManager = analyticsManager
     }
 
     public var body: some View {
         content
+            .onAppear {
+                analyticsManager.track(
+                    event: .view(
+                        name: String(describing: GameView.self)
+                    )
+                )
+            }
             .onDisappear {
                 Task {}
             }

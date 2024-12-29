@@ -60,7 +60,8 @@ extension ContentView {
         NavigationStack(path: $navigationManager.homeRouter.path) {
             HomeView(
                 router: navigationManager.homeRouter,
-                hapticFeedbackManager: hapticFeedbackManager
+                hapticFeedbackManager: hapticFeedbackManager,
+                analyticsManager: analyticsManager
             )
             .navigationDestination(for: HomeUI.Destination.self, destination: handle(_:))
             .sheet(item: $navigationManager.homeRouter.sheet, content: handle(_:))
@@ -91,11 +92,14 @@ extension ContentView {
 
 extension ContentView {
     private var gameFeature: some View {
-        GameView(
-            appStateManager: appStateManager,
-            catalogSongService: catalogSongService,
-            streamingService: streamingService
-        )
+        NavigationStack {
+            GameView(
+                appStateManager: appStateManager,
+                catalogSongService: catalogSongService,
+                streamingService: streamingService,
+                analyticsManager: analyticsManager
+            )
+        }
     }
 }
 
@@ -104,7 +108,8 @@ extension ContentView {
         NavigationStack(path: $navigationManager.settingsRouter.path) {
             SettingsView(
                 router: navigationManager.settingsRouter,
-                musicKitPermissionProvider: musicKitPermissionProvider
+                musicKitPermissionProvider: musicKitPermissionProvider,
+                analyticsManager: analyticsManager
             )
             .navigationDestination(for: SettingsUI.Destination.self, destination: handle(_:))
             .sheet(item: $navigationManager.settingsRouter.sheet, content: handle(_:))
