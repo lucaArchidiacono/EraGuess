@@ -5,6 +5,7 @@
 //  Created by Luca Archidiacono on 28.12.2024.
 //
 
+import HapticFeedbackFeature
 import SwiftUI
 import UINavigation
 
@@ -12,11 +13,14 @@ public struct HomeView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     private let router: Router<HomeUI.Destination, HomeUI.Page>
+    private let hapticFeedbackManager: HapticFeedbackManager
 
     public init(
-        router: Router<HomeUI.Destination, HomeUI.Page>
+        router: Router<HomeUI.Destination, HomeUI.Page>,
+        hapticFeedbackManager: HapticFeedbackManager
     ) {
         self.router = router
+        self.hapticFeedbackManager = hapticFeedbackManager
     }
 
     public var body: some View {
@@ -37,8 +41,10 @@ public struct HomeView: View {
 
                 Spacer()
 
-                VinylDisk()
-                    .shadow(color: .black.opacity(0.3), radius: 20)
+                VinylDisk(
+                    hapticFeedbackManager: hapticFeedbackManager
+                )
+                .shadow(color: .black.opacity(0.3), radius: 20)
 
                 Spacer()
 

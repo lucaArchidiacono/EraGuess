@@ -5,6 +5,7 @@
 //  Created by DG-SM-8669 on 28.12.2024.
 //
 
+import HapticFeedbackFeature
 import SwiftUI
 import UINavigation
 
@@ -13,6 +14,14 @@ struct VinylDisk: View {
 
     @State private var rotation: Double = 0
     @State private var isPressed: Bool = false
+
+    private let hapticFeedbackManager: HapticFeedbackManager
+
+    init(
+        hapticFeedbackManager: HapticFeedbackManager = .init()
+    ) {
+        self.hapticFeedbackManager = hapticFeedbackManager
+    }
 
     var body: some View {
         ZStack {
@@ -68,8 +77,9 @@ struct VinylDisk: View {
                 .onEnded { _ in
                     withAnimation(.spring(response: 0.3)) {
                         isPressed = false
+                        hapticFeedbackManager.fireHaptic(of: .buttonPress)
+                        router.fullScreen = .game
                     }
-                    router.fullScreen = .game
                 }
         )
     }

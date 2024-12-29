@@ -6,6 +6,7 @@
 //
 
 import AnalyticsDomain
+import HapticFeedbackFeature
 import HomeUI
 import OnboardingUI
 import Permission
@@ -18,6 +19,7 @@ struct ContentView: View {
     let appStateManager: AppStateManager
     let analyticsManager: AnalyticsManager
     let notificationPermissionProvider: NotificationPermissionProvider
+    let hapticFeedbackManager: HapticFeedbackManager
 
     var body: some View {
         appView
@@ -50,7 +52,8 @@ extension ContentView {
     private var homeFeature: some View {
         NavigationStack(path: $navigationManager.homeRouter.path) {
             HomeView(
-                router: navigationManager.homeRouter
+                router: navigationManager.homeRouter,
+                hapticFeedbackManager: hapticFeedbackManager
             )
         }
         .navigationDestination(for: HomeUI.Destination.self, destination: handle(_:))
