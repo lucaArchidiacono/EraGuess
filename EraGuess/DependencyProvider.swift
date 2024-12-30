@@ -19,24 +19,7 @@ import SubscriptionDomain
 import SubscriptionFeature
 
 @MainActor
-protocol DependencyProviding {
-    // MARK: - Permissions
-
-    var locationPermissionProvider: LocationPermissionProvider { get }
-    var notificationPermissionProvider: NotificationPermissionProvider { get }
-
-    // MARK: - Managers
-
-    var hapticFeedbackManager: HapticFeedbackManager { get }
-    var soundEffectManager: SoundEffectManager { get }
-    var subscriptionManager: SubscriptionManager { get }
-    var analyticsManager: AnalyticsManager { get }
-    var navigationManager: NavigationManager { get }
-    var userPreferenceManager: UserPreferencesManager { get }
-    var appStateManager: AppStateManager { get }
-}
-
-struct DependencyProvider: DependencyProviding {
+struct DependencyProvider {
     // MARK: - Permissions
 
     let locationPermissionProvider: LocationPermissionProvider
@@ -99,6 +82,7 @@ struct DependencyProvider: DependencyProviding {
             clientSecret: EraGuessShared.spotifyAPIKey,
             api: spotifyAPI
         )
+        
         let playerService = PlayerService()
 
         streamingServiceRepository = StreamingServiceRepository(

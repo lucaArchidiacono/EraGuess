@@ -47,8 +47,8 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
 
         return []
     }
-
-    private func searchSongsInAppleMusic(catalogSong: CatalogSong) async -> [StreamableSong] {
+    
+    public func searchSongsInAppleMusic(catalogSong: CatalogSong) async -> [StreamableSong] {
         do {
             let songs = try await appleMusicService.searchSongs(catalogSong: catalogSong)
             return songs
@@ -58,7 +58,7 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
         }
     }
 
-    private func searchSongsInSpotify(catalogSong: CatalogSong) async -> [StreamableSong] {
+    public func searchSongsInSpotify(catalogSong: CatalogSong) async -> [StreamableSong] {
         do {
             let songs = try await spotifyService.searchSongs(catalogSong: catalogSong)
             return songs

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MusicService: String, CaseIterable, Hashable, Sendable {
+public enum MusicService: String, CaseIterable, Hashable, Sendable, Codable {
     case appleMusic = "Apple Music"
     case spotify = "Spotify"
 }

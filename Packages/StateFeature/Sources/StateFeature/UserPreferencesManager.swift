@@ -12,8 +12,10 @@ import SwiftUI
 
 @Observable
 public final class UserPreferencesManager {
+    private static let musicServicesURL = URL.applicationDirectory.appending(path: "musicServices.json")
+    
     @ObservationIgnored
-    @Shared(.appStorage("preferredMusicService")) public var preferredMusicService: MusicService? = nil
+    @Shared(.fileStorage(musicServicesURL)) public var musicServices: Set<MusicService> = [.spotify]
 
     public init() {}
 }

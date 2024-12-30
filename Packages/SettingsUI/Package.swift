@@ -41,6 +41,9 @@ let package = Package(
                 "SharedUI",
                 "Permission",
                 "EmailFeatureUI",
+            ],
+            resources: [
+                .process("Resources/")
             ]
         ),
     ]

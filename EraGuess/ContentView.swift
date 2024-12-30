@@ -27,6 +27,7 @@ struct ContentView: View {
     let hapticFeedbackManager: HapticFeedbackManager
     let catalogSongService: CatalogSongService
     let streamingServiceRepository: StreamingServiceRepository
+    let userPreferencesManager: UserPreferencesManager
 
     var body: some View {
         appView
@@ -109,7 +110,8 @@ extension ContentView {
             SettingsView(
                 router: navigationManager.settingsRouter,
                 musicKitPermissionProvider: musicKitPermissionProvider,
-                analyticsManager: analyticsManager
+                analyticsManager: analyticsManager,
+                userPreferencesManager: userPreferencesManager
             )
             .navigationDestination(for: SettingsUI.Destination.self, destination: handle(_:))
             .sheet(item: $navigationManager.settingsRouter.sheet, content: handle(_:))
