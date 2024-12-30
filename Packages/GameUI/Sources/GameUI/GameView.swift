@@ -15,6 +15,8 @@ import StateFeature
 import SwiftUI
 
 public struct GameView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     private let logger = Logger(label: String(describing: GameView.self))
 
     @State private var appStateManager: AppStateManager
@@ -38,6 +40,11 @@ public struct GameView: View {
 
     public var body: some View {
         content
+            .toolbar {
+                TextToolbar("Done", placement: .topBarTrailing) {
+                    dismiss()
+                }
+            }
             .onAppear {
                 analyticsManager.track(
                     event: .view(
