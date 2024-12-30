@@ -48,8 +48,8 @@ public struct SpotifyAPIImpl: SpotifyAPI {
             track: track,
             artist: artist
         )
-        let (data, _) = try await network.request(request: request)
-
+        let response: GETTracksResponse = try await network.request(request: request)
+        logger.notice("Successfully fetched tracks")
         return []
     }
 }
