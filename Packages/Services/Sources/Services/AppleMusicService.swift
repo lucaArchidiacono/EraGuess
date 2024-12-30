@@ -15,9 +15,10 @@ public struct AppleMusicService: StreamingService {
 
     public init() {}
 
-    public func searchSongs(query: String) async throws -> [StreamableSong] {
-        logger.trace("Searching for songs with query: \(query)")
-        var request = MusicCatalogSearchRequest(term: query, types: [Song.self])
+    public func searchSongs(catalogSong: CatalogSong) async throws -> [StreamableSong] {
+        logger.trace("Searching for songs with: \(catalogSong)")
+        let term = "\(catalogSong.title) \(catalogSong.artist)"
+        var request = MusicCatalogSearchRequest(term: term, types: [Song.self])
         request.limit = 10
 
         let response = try await request.response()

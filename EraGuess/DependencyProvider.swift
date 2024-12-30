@@ -10,8 +10,10 @@ import AnalyticsFeature
 import EraGuessShared
 import HapticFeedbackFeature
 import Permission
+import REST
 import Services
 import SoundEffectFeature
+import SpotifyAPI
 import StateFeature
 import SubscriptionDomain
 import SubscriptionFeature
@@ -57,6 +59,7 @@ struct DependencyProvider: DependencyProviding {
     let streamingServiceRepository: StreamingServiceRepository
 
     init() {
+        let rest = RESTService()
         locationPermissionProvider = LocationPermissionProvider()
         notificationPermissionProvider = NotificationPermissionProvider()
         musicKitPermissionProvider = MusicKitPermissionProvider()
@@ -89,7 +92,13 @@ struct DependencyProvider: DependencyProviding {
         catalogSongService = CatalogSongServiceImpl()
 
         let appleMusicService = AppleMusicService()
-        let spotifyService = SpotifyService()
+
+        let spotifyAPI = SpotifyAPIImpl(network: rest)
+        let spotifyService = SpotifyService(
+            clientId: EraGuessShared.spotifyAPIId,
+            clientSecret: EraGuessShared.spotifyAPIKey,
+            api: spotifyAPI
+        )
         let playerService = PlayerService()
 
         streamingServiceRepository = StreamingServiceRepository(

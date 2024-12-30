@@ -4,36 +4,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "Services",
+    name: "SpotifyAPI",
     platforms: [
         .iOS(.v16),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Services",
-            targets: ["Services"]
+            name: "SpotifyAPI",
+            targets: ["SpotifyAPI"]
         ),
     ],
     dependencies: [
         .package(path: "../Models"),
         .package(path: "../REST"),
         .package(path: "../Logger"),
-        .package(path: "../SpotifyAPI"),
+        .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Services",
+            name: "SpotifyAPI",
             dependencies: [
                 "Models",
                 "REST",
                 "Logger",
-                "SpotifyAPI",
-            ],
-            resources: [
-                .copy("Resources/en-DE-Songs.json"),
+                .product(name: "SwiftSoup", package: "SwiftSoup"),
             ]
         ),
     ]

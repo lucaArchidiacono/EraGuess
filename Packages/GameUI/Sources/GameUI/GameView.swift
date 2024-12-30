@@ -46,7 +46,9 @@ public struct GameView: View {
                 )
             }
             .onDisappear {
-                Task {}
+                Task {
+                    await streamingServiceRepository.stop()
+                }
             }
     }
 
@@ -108,7 +110,7 @@ public struct GameView: View {
                             await streamingServiceRepository.stop()
                         }
 
-                        let streamableSongs = try await streamingServiceRepository.searchSongs(query: catalogSong.title)
+                        let streamableSongs = try await streamingServiceRepository.searchSongs(catalogSong: catalogSong)
                         guard let streamableSong = streamableSongs.first else { return }
                         try await streamingServiceRepository.play(song: streamableSong)
                     } catch {

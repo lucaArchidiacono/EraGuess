@@ -32,14 +32,14 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
         self.playerService = playerService
     }
 
-    public func searchSongs(query: String) async throws -> [StreamableSong] {
-        let appleMusicSongs = await searchSongsInAppleMusic(query: query)
+    public func searchSongs(catalogSong: CatalogSong) async throws -> [StreamableSong] {
+        let appleMusicSongs = await searchSongsInAppleMusic(catalogSong: catalogSong)
 
         if !appleMusicSongs.isEmpty {
             return appleMusicSongs
         }
 
-        let spotifySongs = await searchSongsInSpotify(query: query)
+        let spotifySongs = await searchSongsInSpotify(catalogSong: catalogSong)
 
         if !spotifySongs.isEmpty {
             return spotifySongs
@@ -48,9 +48,9 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
         return []
     }
 
-    private func searchSongsInAppleMusic(query: String) async -> [StreamableSong] {
+    private func searchSongsInAppleMusic(catalogSong: CatalogSong) async -> [StreamableSong] {
         do {
-            let songs = try await appleMusicService.searchSongs(query: query)
+            let songs = try await appleMusicService.searchSongs(catalogSong: catalogSong)
             return songs
         } catch {
             logger.error("Failed to search songs in Apple Music: \(error)")
@@ -58,9 +58,9 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
         }
     }
 
-    private func searchSongsInSpotify(query: String) async -> [StreamableSong] {
+    private func searchSongsInSpotify(catalogSong: CatalogSong) async -> [StreamableSong] {
         do {
-            let songs = try await spotifyService.searchSongs(query: query)
+            let songs = try await spotifyService.searchSongs(catalogSong: catalogSong)
             return songs
         } catch {
             logger.error("Failed to search songs in Spotify: \(error)")

@@ -20,6 +20,7 @@ let package = Package(
         .package(path: "../Models"),
         .package(path: "../StateFeature"),
         .package(path: "../UINavigation"),
+        .package(path: "../Services"),
         .package(path: "../HapticFeedbackFeature"),
     ],
     targets: [
@@ -33,6 +34,7 @@ let package = Package(
                 "StateFeature",
                 "UINavigation",
                 "HapticFeedbackFeature",
+                "Services",
             ]
         ),
     ]

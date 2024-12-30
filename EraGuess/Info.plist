@@ -10,6 +10,10 @@
 	<string>${APPLICATION_IDENTIFIER}</string>
 	<key>TELEMETRYDECK_KEY</key>
 	<string>${TELEMETRYDECK_KEY}</string>
+	<key>SPOTIFY_ID</key>
+	<string>${SPOTIFY_ID}</string>
+	<key>SPOTIFY_KEY</key>
+	<string>${SPOTIFY_KEY}</string>
 	<key>ApplicationSecurityGroupIdentifier</key>
 	<string>${SECURITY_GROUP_IDENTIFIER}</string>
 </dict>

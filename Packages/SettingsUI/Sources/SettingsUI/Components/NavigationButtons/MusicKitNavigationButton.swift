@@ -42,7 +42,7 @@ struct MusicKitNavigationButton: View {
             openURL(EraGuessShared.appSettingsURL)
         } label: {
             HStack {
-                NavigationText("MusicKit")
+                NavigationText("MusicKit Access")
 
                 Spacer()
 

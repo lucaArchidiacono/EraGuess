@@ -39,6 +39,7 @@
 		0F5C70952D2068BD002EF106 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70942D2068BD002EF106 /* Models */; };
 		0F5C70BF2D2076A0002EF106 /* StateFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70BE2D2076A0002EF106 /* StateFeature */; };
 		0F7FCB5E2D20A02500D07E8D /* HomeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7FCB5D2D20A02500D07E8D /* HomeUI */; };
+		0FD88F012D22F0BB00C9BCC8 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 0FD88F002D22F0BB00C9BCC8 /* SpotifyAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 				0F5C6FBE2D201CC1002EF106 /* AnalyticsFeature in Frameworks */,
 				0F5C6FCF2D201CF3002EF106 /* Permission in Frameworks */,
 				0F5C70952D2068BD002EF106 /* Models in Frameworks */,
+				0FD88F012D22F0BB00C9BCC8 /* SpotifyAPI in Frameworks */,
 				0F44D30B2D201BDA00698999 /* Permission in Frameworks */,
 				0F5C705D2D202764002EF106 /* EraGuessShared in Frameworks */,
 				0F44D2FC2D201B8B00698999 /* SharedUI in Frameworks */,
@@ -183,6 +185,7 @@
 				0F0410A42D219FE7009F9ADD /* Services */,
 				0F0410A82D21BC30009F9ADD /* GameUI */,
 				0F0410DA2D21D40E009F9ADD /* EmailFeatureUI */,
+				0FD88F002D22F0BB00C9BCC8 /* SpotifyAPI */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -232,6 +235,7 @@
 				0F0410A32D219FE7009F9ADD /* XCLocalSwiftPackageReference "Packages/Services" */,
 				0F0410A72D21BC30009F9ADD /* XCLocalSwiftPackageReference "Packages/GameUI" */,
 				0F0410D92D21D40D009F9ADD /* XCLocalSwiftPackageReference "Packages/EmailFeatureUI" */,
+				0FD88EFF2D22F0BB00C9BCC8 /* XCLocalSwiftPackageReference "Packages/SpotifyAPI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
@@ -572,6 +576,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/HomeUI;
 		};
+		0FD88EFF2D22F0BB00C9BCC8 /* XCLocalSwiftPackageReference "Packages/SpotifyAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/SpotifyAPI;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -702,6 +710,10 @@
 		0F7FCB5D2D20A02500D07E8D /* HomeUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HomeUI;
+		};
+		0FD88F002D22F0BB00C9BCC8 /* SpotifyAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SpotifyAPI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -23,6 +23,11 @@ public enum EraGuessShared {
     /// TelemetryDeck API Key
     public static let telemetryAPIKey = Bundle.main.object(forInfoDictionaryKey: "TELEMETRYDECK_KEY") as! String
 
+    /// Spotify API ID
+    public static let spotifyAPIId = Bundle.main.object(forInfoDictionaryKey: "SPOTIFY_ID") as! String
+    /// Spotify API Key
+    public static let spotifyAPIKey = Bundle.main.object(forInfoDictionaryKey: "SPOTIFY_KEY") as! String
+
     /// Privacy policy URL.
     public static let privacyPolicyURL = URL(string: "https://eraguess.ch/privacy")!
     /// Terms of Use URL.

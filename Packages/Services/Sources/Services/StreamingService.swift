@@ -12,5 +12,5 @@ enum StreamingServiceError: Error {
 }
 
 public protocol StreamingService: Sendable {
-    func searchSongs(query: String) async throws -> [StreamableSong]
+    func searchSongs(catalogSong: CatalogSong) async throws -> [StreamableSong]
 }
