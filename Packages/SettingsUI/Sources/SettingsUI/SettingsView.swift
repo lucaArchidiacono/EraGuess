@@ -20,17 +20,20 @@ public struct SettingsView: View {
     private let musicKitPermissionProvider: MusicKitPermissionProvider
     private let analyticsManager: AnalyticsManager
     private let userPreferencesManager: UserPreferencesManager
+    private let appStateManager: AppStateManager
 
     public init(
         router: Router<SettingsUI.Destination, SettingsUI.Page>,
         musicKitPermissionProvider: MusicKitPermissionProvider,
         analyticsManager: AnalyticsManager,
-        userPreferencesManager: UserPreferencesManager
+        userPreferencesManager: UserPreferencesManager,
+        appStateManager: AppStateManager
     ) {
         self.router = router
         self.musicKitPermissionProvider = musicKitPermissionProvider
         self.analyticsManager = analyticsManager
         self.userPreferencesManager = userPreferencesManager
+        self.appStateManager = appStateManager
     }
 
     public var body: some View {
@@ -43,6 +46,7 @@ public struct SettingsView: View {
             }
             .environment(router)
             .environment(userPreferencesManager)
+            .environment(appStateManager)
             .onAppear {
                 analyticsManager.track(
                     event: .view(
@@ -54,12 +58,17 @@ public struct SettingsView: View {
 
     private var content: some View {
         List {
-            streamingServicesSection
             userPreferencesSection
+            streamingServicesSection
+            languageSetSection
             extrasSection
         }
     }
 
+    private var languageSetSection: some View {
+        LanguageSetSection()
+    }
+    
     private var streamingServicesSection: some View {
         StreamingServiceSection(
             musicKitPermissionProvider: musicKitPermissionProvider

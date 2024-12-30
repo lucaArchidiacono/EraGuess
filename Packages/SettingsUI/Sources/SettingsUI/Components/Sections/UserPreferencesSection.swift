@@ -19,6 +19,11 @@ struct UserPreferencesSection: View {
             )
 
             AppLanguageNavigationButton()
+        } footer: {
+            Text("""
+                You can change the language of the app and give permission to access Apple Music.
+                No worries, you do not need to have an Apple Music subscription.
+                """)
         }
     }
 }

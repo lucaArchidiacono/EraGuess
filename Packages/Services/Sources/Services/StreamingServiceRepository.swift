@@ -16,9 +16,9 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
 
     private let playerService: PlayerService
 
-    public var isPlaying: Bool {
+    public var playbackState: PlaybackState {
         get async {
-            await playerService.getIsPlaying()
+            await playerService.getPlaybackState()
         }
     }
 
@@ -73,6 +73,11 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
         await playerService.play(url: song.previewURL)
     }
 
+    public func resume() async {
+        logger.trace("Pausing the player")
+        await playerService.resume()
+    }
+    
     public func pause() async {
         logger.trace("Pausing the player")
         await playerService.pause()

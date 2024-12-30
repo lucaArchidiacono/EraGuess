@@ -31,17 +31,12 @@ struct StreamingServiceSection: View {
             }
     }
     
-    private var content: some View {
-        ForEach(MusicService.allCases, id: \.self) { musicService in
-            selectionCard(musicService)
-                .listRowSeparator(.hidden)
-        }
-    }
-    
     private var section: some View {
         Section {
             content
                 .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+        } header: {
+            Text("Streaming Services")
         } footer: {
             Text("""
                 Keep in mind if you do give permission to use Apple Music, Spotify will be used and can not be disabled.
@@ -50,6 +45,13 @@ struct StreamingServiceSection: View {
         }
     }
     
+    private var content: some View {
+        ForEach(MusicService.allCases, id: \.self) { musicService in
+            selectionCard(musicService)
+                .listRowSeparator(.hidden)
+        }
+    }
+
     @ViewBuilder
     private func selectionCard(_ service: MusicService) -> some View {
         switch service {
@@ -59,6 +61,7 @@ struct StreamingServiceSection: View {
                     header: .image(Image("Apple Music", bundle: .module)),
                     title: "Apple Music",
                     description: """
+                    No subscription required.
                     Use Apple Music to play the music as preview.
                     Its the preferred service with better quality and better music matching.
                     """
@@ -91,6 +94,7 @@ struct StreamingServiceSection: View {
                     header: .image(Image("Spotify", bundle: .module)),
                     title: "Spotify",
                     description: """
+                    No subscription required.
                     Use Spotify to play the music as preview.
                     It's a good alternative and is used as fallback when Apple Music is selected.
                     """

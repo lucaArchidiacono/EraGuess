@@ -96,6 +96,7 @@ extension ContentView {
         NavigationStack {
             GameView(
                 appStateManager: appStateManager,
+                userPreferencesManager: userPreferencesManager,
                 catalogSongService: catalogSongService,
                 streamingServiceRepository: streamingServiceRepository,
                 analyticsManager: analyticsManager
@@ -111,7 +112,8 @@ extension ContentView {
                 router: navigationManager.settingsRouter,
                 musicKitPermissionProvider: musicKitPermissionProvider,
                 analyticsManager: analyticsManager,
-                userPreferencesManager: userPreferencesManager
+                userPreferencesManager: userPreferencesManager,
+                appStateManager: appStateManager
             )
             .navigationDestination(for: SettingsUI.Destination.self, destination: handle(_:))
             .sheet(item: $navigationManager.settingsRouter.sheet, content: handle(_:))

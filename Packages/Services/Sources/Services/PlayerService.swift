@@ -7,12 +7,13 @@
 
 import AVFoundation
 import Logger
+import Models
 
 public actor PlayerService {
     private let logger = Logger(label: String(describing: PlayerService.self))
     private let player = AVPlayer()
 
-    private var isPlaying = false
+    private var playbackState: PlaybackState = .stopped
 
     public init() {}
 
@@ -21,25 +22,32 @@ public actor PlayerService {
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
         player.play()
-        isPlaying = true
+        playbackState = .playing
     }
 
     func pause() {
-        guard isPlaying else { return }
+        guard playbackState == .playing else { return }
         logger.debug("Pausing audio")
         player.pause()
-        isPlaying = false
+        playbackState = .paused
     }
 
     func stop() {
-        guard isPlaying else { return }
+        guard playbackState == .playing else { return }
         logger.debug("Stopping audio")
         player.pause()
         player.replaceCurrentItem(with: nil)
-        isPlaying = false
+        playbackState = .stopped
+    }
+    
+    func resume() {
+        guard playbackState == .paused else { return }
+        logger.debug("Resuming audio")
+        player.play()
+        playbackState = .playing
     }
 
-    func getIsPlaying() -> Bool {
-        isPlaying
+    func getPlaybackState() -> PlaybackState {
+        playbackState
     }
 }
