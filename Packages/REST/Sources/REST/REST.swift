@@ -8,6 +8,7 @@ import Foundation
 
 public protocol REST: Sendable {
     func request<T: Decodable>(request: Request) async throws -> T
+    func request(url: URL) async throws -> (Data, HTTPURLResponse)
     func request(request: Request) async throws -> (Data, HTTPURLResponse)
     func download(request: Request) async throws -> (URL, HTTPURLResponse)
 }
@@ -59,6 +60,31 @@ public final class RESTService: REST, @unchecked Sendable {
     }
 
     public func request(request: Request) async throws -> (Data, HTTPURLResponse) {
+        let urlRequest = try HTTPEncodingTransformer.transform(request)
+
+        let session = request.cached ? cachedSession : session
+        let (data, response) = try await session.data(for: urlRequest)
+
+        guard let response = response as? HTTPURLResponse else {
+            throw HTTPError.noResponse
+        }
+
+        switch response.statusCode {
+        case 200 ... 299:
+            return (data, response)
+        default:
+            throw HTTPError.badHttpStatusCode(code: response.statusCode)
+        }
+    }
+    
+    public func request(url: URL) async throws -> (Data, HTTPURLResponse) {
+        struct SimpleRequest: Request {
+            var baseURL: URL?
+            var body: HTTPBody { .empty }
+            var method: HTTPMethod { .get }
+        }
+        
+        let request = SimpleRequest(baseURL: url)
         let urlRequest = try HTTPEncodingTransformer.transform(request)
 
         let session = request.cached ? cachedSession : session

@@ -56,4 +56,17 @@ public struct StreamableSong: Song {
         self.year = year
         self.previewURL = previewURL
     }
+    
+    public init(
+        _ item: StreamableSong,
+        previewURL: URL
+    ) {
+        self.init(
+            id: item.id,
+            title: item.title,
+            artist: item.artist,
+            year: item.year,
+            previewURL: previewURL
+        )
+    }
 }
