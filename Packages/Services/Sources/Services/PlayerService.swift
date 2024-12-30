@@ -15,7 +15,14 @@ public actor PlayerService {
 
     private var playbackState: PlaybackState = .stopped
 
-    public init() {}
+    public init() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            logger.error("Failed to set audio session category: \(error)")
+        }
+    }
 
     func play(url: URL) {
         logger.debug("Playing audio from url: \(url)")
