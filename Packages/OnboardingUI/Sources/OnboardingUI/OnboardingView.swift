@@ -38,6 +38,7 @@ public struct OnboardingView: View {
         TabView(selection: $currentIndex) {
             ForEach(0 ..< pageConfigs.count, id: \.self) { index in
                 OnboardingPage(config: pageConfigs[index])
+                    .gesture(DragGesture())
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
