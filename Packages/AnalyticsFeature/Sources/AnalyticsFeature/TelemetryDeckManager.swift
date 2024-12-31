@@ -29,7 +29,7 @@ public struct TelemetryDeckConfiguration: AnalyticsConfiguration {
 }
 
 public final class TelemetryDeckManager: AnalyticsManager {
-    private let logger = Logger(label: "TelemetryDeckManager")
+    private let logger = Logger(label: String(describing: TelemetryDeckManager.self))
     private let permissionProviders: [any PermissionProvider]
 
     public init(
