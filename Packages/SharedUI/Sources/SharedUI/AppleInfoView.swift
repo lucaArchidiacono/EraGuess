@@ -1,34 +1,53 @@
 //
-//  OnboardingPage.swift
-//  OnboardingFeature
+//  AppleInfoView.swift
+//  SharedUI
 //
-//  Created by Luca Archidiacono on 16.09.2024.
+//  Created by DG-SM-8669 on 31.12.2024.
 //
 
 import Foundation
-import Models
 import SwiftUI
 
-struct OnboardingPageConfig {
+public struct AppleInfoConfig {
     let title: String
-    let bulletPoints: [OnboardingBulletPointConfig]
-    var selections: [AnyHashable?] = []
-    var onSelection: ((AnyHashable?) -> Void)?
-    let buttonTitle: String
-    let onAction: (@escaping () -> Void) -> Void
+    let bulletPoints: [BulletPointConfig]
+    let buttonTitle: String?
+    let onAction: ((@escaping () -> Void) -> Void)?
+
+    public init(
+        title: String,
+        bulletPoints: [BulletPointConfig],
+        buttonTitle: String? = nil,
+        onAction: ((@escaping () -> Void) -> Void)? = nil
+    ) {
+        self.title = title
+        self.bulletPoints = bulletPoints
+        self.buttonTitle = buttonTitle
+        self.onAction = onAction
+    }
 }
 
-struct OnboardingPage: View {
+public struct AppleInfoView: View {
     @State private var isLoading: Bool = false
-    @State private var selected: AnyHashable? = nil
 
-    let config: OnboardingPageConfig
+    private let config: AppleInfoConfig
 
-    var body: some View {
+    public init(
+        config: AppleInfoConfig
+    ) {
+        self.config = config
+    }
+
+    public var body: some View {
         VStack {
             title
             list
-            button
+
+            if let buttonTitle = config.buttonTitle,
+               let onAction = config.onAction
+            {
+                button(buttonTitle, action: onAction)
+            }
         }
     }
 
@@ -54,11 +73,11 @@ struct OnboardingPage: View {
         .listRowBackground(Color.clear)
     }
 
-    var button: some View {
+    func button(_ title: String, action: @escaping (@escaping () -> Void) -> Void) -> some View {
         Button {
             isLoading.toggle()
 
-            config.onAction {
+            action {
                 isLoading.toggle()
             }
         } label: {
@@ -66,7 +85,7 @@ struct OnboardingPage: View {
                 if isLoading {
                     ProgressView()
                 } else {
-                    Text(config.buttonTitle)
+                    Text(title)
                         .fontWeight(.bold)
                 }
             }
@@ -75,12 +94,11 @@ struct OnboardingPage: View {
         }
         .padding()
         .buttonStyle(.borderedProminent)
-        .disabled(!config.selections.isEmpty && selected == nil)
     }
 
     private var bulletPoints: some View {
         ForEach(config.bulletPoints, id: \.self) { config in
-            OnboardingBulletPoint(config: config)
+            IconBulletPoint(config: config)
         }
     }
 }

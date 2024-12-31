@@ -15,6 +15,10 @@ struct HomeToolbar: ToolbarContent {
     @Environment(Router<Destination, Page>.self) private var router: Router<Destination, Page>
 
     var body: some ToolbarContent {
+        FAQToolbar(placement: .topBarTrailing) {
+            router.sheet = .faq
+        }
+
         SettingsToolbar(placement: .topBarTrailing) {
             router.sheet = .settings
         }

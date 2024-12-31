@@ -14,16 +14,36 @@ import SharedUI
 import StateFeature
 import SwiftUI
 
+struct Player {
+    let score: Int
+    let catalogSongs: [CatalogSong]
+}
+
+enum GameState {
+    case playing
+    case setup
+    case finished
+}
+
+enum GameMode {
+    case singlePlayer
+    case multiplayer
+}
+
 public struct GameView: View {
     @Environment(\.dismiss) private var dismiss
-    
+
     private let logger = Logger(label: String(describing: GameView.self))
 
     @State private var appStateManager: AppStateManager
     @State private var userPreferencesManager: UserPreferencesManager
-    
+
     @State private var catalogSongs: [CatalogSong] = []
     @State private var playbackState: PlaybackState = .stopped
+
+    @State private var players: [Player] = []
+    @State private var state: GameState = .setup
+    @State private var mode: GameMode = .singlePlayer
 
     private let catalogSongService: CatalogSongService
     private let streamingServiceRepository: StreamingServiceRepository
@@ -46,8 +66,10 @@ public struct GameView: View {
 
     public var body: some View {
         content
+            .ignoresSafeArea(.all)
+            .statusBar(hidden: true)
             .toolbar {
-                TextToolbar("Done", placement: .topBarTrailing) {
+                CloseToolbar(placement: .topBarTrailing) {
                     dismiss()
                 }
             }
@@ -86,7 +108,7 @@ public struct GameView: View {
             audioControls
         }
     }
-    
+
     private var list: some View {
         List {
             songs
@@ -99,7 +121,7 @@ public struct GameView: View {
                 Task {
                     do {
                         playbackState = await streamingServiceRepository.playbackState
-                        
+
                         if playbackState == .playing {
                             await streamingServiceRepository.stop()
                         }
@@ -115,7 +137,6 @@ public struct GameView: View {
             }
         }
     }
-    
 
     private var audioControls: some View {
         HStack(spacing: 30) {
@@ -123,13 +144,13 @@ public struct GameView: View {
             Button(action: {
                 Task {
                     playbackState = await streamingServiceRepository.playbackState
-                    
+
                     if playbackState == .paused {
                         await streamingServiceRepository.resume()
                     } else {
                         await streamingServiceRepository.pause()
                     }
-                    
+
                     playbackState = await streamingServiceRepository.playbackState
                 }
             }) {
@@ -146,11 +167,11 @@ public struct GameView: View {
             Button(action: {
                 Task {
                     playbackState = await streamingServiceRepository.playbackState
-                    
+
                     if playbackState == .playing {
                         await streamingServiceRepository.stop()
                     }
-                    
+
                     playbackState = await streamingServiceRepository.playbackState
                 }
             }) {

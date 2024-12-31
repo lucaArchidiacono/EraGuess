@@ -6,9 +6,11 @@
 //
 
 import AnalyticsDomain
+import FAQUI
 import Foundation
 import Models
 import Permission
+import SharedUI
 import SwiftUI
 
 @MainActor
@@ -16,7 +18,7 @@ public struct OnboardingView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var currentIndex: Int = 0
-    @State private var pageConfigs: [OnboardingPageConfig] = []
+    @State private var infoConfigs: [AppleInfoConfig] = []
     @State private var hasSeenOnboarding: Bool = false
 
     private let analyticsManager: AnalyticsManager
@@ -36,8 +38,8 @@ public struct OnboardingView: View {
 
     public var body: some View {
         TabView(selection: $currentIndex) {
-            ForEach(0 ..< pageConfigs.count, id: \.self) { index in
-                OnboardingPage(config: pageConfigs[index])
+            ForEach(0 ..< infoConfigs.count, id: \.self) { index in
+                AppleInfoView(config: infoConfigs[index])
                     .gesture(DragGesture())
             }
         }
@@ -64,25 +66,25 @@ extension OnboardingView {
     }
 
     private func setupOnboardingPages() {
-        let welcomePage = OnboardingPageConfig(
+        let welcomePage = AppleInfoConfig(
             title: "Welcome to EraGuess!",
             bulletPoints: [
                 .init(
-                    imageName: "music.note",
+                    icon: .system(name: "music.note"),
                     title: "Play music and guess the era",
                     description: """
                     Listen to a preview of the music and guess the year it was released in.
                     """
                 ),
                 .init(
-                    imageName: "person.3.sequence.fill",
+                    icon: .system(name: "person.3.sequence.fill"),
                     title: "Single or multiplayer",
                     description: """
                     Play with multiple friends or by yourself.
                     """
                 ),
                 .init(
-                    imageName: "trophy.fill",
+                    icon: .system(name: "trophy.fill"),
                     title: "Compete and earn points",
                     description: """
                     Earn points by correctly guessing the year, artist name, and song title.
@@ -92,57 +94,19 @@ extension OnboardingView {
             buttonTitle: "Continue",
             onAction: goToNextPage(using:)
         )
-        pageConfigs.append(welcomePage)
+        infoConfigs.append(welcomePage)
 
-        let rulesPage = OnboardingPageConfig(
-            title: "How to Play",
-            bulletPoints: [
-                .init(
-                    imageName: "play.circle.fill",
-                    title: "Listen to the Preview",
-                    description: """
-                    Each round starts with a short preview of a song. Pay attention to the style and sound!
-                    """
-                ),
-                .init(
-                    imageName: "calendar",
-                    title: "Place on Timeline",
-                    description: """
-                    Place the song on the timeline between two reference tracks. The closer you get to the actual release year, the more points you earn.
-                    """
-                ),
-                .init(
-                    imageName: "music.mic",
-                    title: "Bonus Points",
-                    description: """
-                    Get extra points by correctly guessing the artist's name and song title.
-                    """
-                ),
-                .init(
-                    imageName: "checkmark.circle.fill",
-                    title: "Win the Game",
-                    description: """
-                    First player to correctly guess 10 songs wins! Incorrect guesses don't count towards your progress.
-                    """
-                ),
-                .init(
-                    imageName: "arrow.triangle.2.circlepath",
-                    title: "Taking Turns",
-                    description: """
-                    Players take turns guessing. If you guess incorrectly, the song is discarded and it's the next player's turn.
-                    """
-                ),
-            ],
+        let faqPage = FAQView.appleInfoConfig(
             buttonTitle: "Let's Play",
             onAction: goToNextPage(using:)
         )
-        pageConfigs.append(rulesPage)
+        infoConfigs.append(faqPage)
     }
 
     private func goToNextPage(using completion: @escaping () -> Void) {
         completion()
 
-        guard pageConfigs.count - 1 > currentIndex else {
+        guard infoConfigs.count - 1 > currentIndex else {
             hasSeenOnboarding = true
             return
         }

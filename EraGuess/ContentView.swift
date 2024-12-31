@@ -7,6 +7,7 @@
 
 import AnalyticsDomain
 import EmailFeatureUI
+import FAQUI
 import GameUI
 import HapticFeedbackFeature
 import HomeUI
@@ -87,6 +88,8 @@ extension ContentView {
             EmptyView()
         case .game:
             gameFeature
+        case .faq:
+            FAQView()
         }
     }
 }

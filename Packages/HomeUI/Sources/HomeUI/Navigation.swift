@@ -18,6 +18,7 @@ public enum Page: Hashable, Identifiable {
     case settings
     case subscription
     case game
+    case faq
 
     public var id: Self { self }
 }

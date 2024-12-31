@@ -39,6 +39,7 @@
 		0F5C70952D2068BD002EF106 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70942D2068BD002EF106 /* Models */; };
 		0F5C70BF2D2076A0002EF106 /* StateFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0F5C70BE2D2076A0002EF106 /* StateFeature */; };
 		0F7FCB5E2D20A02500D07E8D /* HomeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7FCB5D2D20A02500D07E8D /* HomeUI */; };
+		0FD6F8442D23FA1500D3340A /* FAQUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0FD6F8432D23FA1500D3340A /* FAQUI */; };
 		0FD88F012D22F0BB00C9BCC8 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 0FD88F002D22F0BB00C9BCC8 /* SpotifyAPI */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 				0F44D30E2D201C3400698999 /* AnalyticsDomain in Frameworks */,
 				0F0410A92D21BC30009F9ADD /* GameUI in Frameworks */,
 				0F44D3102D201C3400698999 /* AnalyticsFeature in Frameworks */,
+				0FD6F8442D23FA1500D3340A /* FAQUI in Frameworks */,
 				0F44D2F42D201B5E00698999 /* SubscriptionDomain in Frameworks */,
 				0F44D2F92D201B8100698999 /* SoundEffectFeature in Frameworks */,
 				0F7FCB5E2D20A02500D07E8D /* HomeUI in Frameworks */,
@@ -186,6 +188,7 @@
 				0F0410A82D21BC30009F9ADD /* GameUI */,
 				0F0410DA2D21D40E009F9ADD /* EmailFeatureUI */,
 				0FD88F002D22F0BB00C9BCC8 /* SpotifyAPI */,
+				0FD6F8432D23FA1500D3340A /* FAQUI */,
 			);
 			productName = EraGuess;
 			productReference = 0F44D2BC2D200CC700698999 /* EraGuess.app */;
@@ -236,6 +239,7 @@
 				0F0410A72D21BC30009F9ADD /* XCLocalSwiftPackageReference "Packages/GameUI" */,
 				0F0410D92D21D40D009F9ADD /* XCLocalSwiftPackageReference "Packages/EmailFeatureUI" */,
 				0FD88EFF2D22F0BB00C9BCC8 /* XCLocalSwiftPackageReference "Packages/SpotifyAPI" */,
+				0FD6F8422D23FA1500D3340A /* XCLocalSwiftPackageReference "Packages/FAQUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F44D2BD2D200CC700698999 /* Products */;
@@ -576,6 +580,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/HomeUI;
 		};
+		0FD6F8422D23FA1500D3340A /* XCLocalSwiftPackageReference "Packages/FAQUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/FAQUI;
+		};
 		0FD88EFF2D22F0BB00C9BCC8 /* XCLocalSwiftPackageReference "Packages/SpotifyAPI" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/SpotifyAPI;
@@ -710,6 +718,10 @@
 		0F7FCB5D2D20A02500D07E8D /* HomeUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HomeUI;
+		};
+		0FD6F8432D23FA1500D3340A /* FAQUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FAQUI;
 		};
 		0FD88F002D22F0BB00C9BCC8 /* SpotifyAPI */ = {
 			isa = XCSwiftPackageProductDependency;
