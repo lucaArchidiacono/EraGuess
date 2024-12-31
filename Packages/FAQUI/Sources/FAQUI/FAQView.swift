@@ -5,15 +5,27 @@
 //  Created by DG-SM-8669 on 31.12.2024.
 //
 
+import AnalyticsDomain
 import Foundation
 import SharedUI
 import SwiftUI
 
 public struct FAQView: View {
-    public init() {}
+    private let analyticsManager: AnalyticsManager
+
+    public init(
+        analyticsManager: AnalyticsManager
+    ) {
+        self.analyticsManager = analyticsManager
+    }
 
     public var body: some View {
         AppleInfoView(config: Self.appleInfoConfig())
+            .onAppear {
+                analyticsManager.track(
+                    event: .view(name: String(describing: FAQView.self))
+                )
+            }
     }
 }
 

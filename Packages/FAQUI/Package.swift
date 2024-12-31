@@ -16,6 +16,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(path: "../AnalyticsFeature"),
         .package(path: "../SharedUI"),
     ],
     targets: [
@@ -25,6 +26,7 @@ let package = Package(
             name: "FAQUI",
             dependencies: [
                 "SharedUI",
+                "AnalyticsFeature",
             ]
         ),
     ]
