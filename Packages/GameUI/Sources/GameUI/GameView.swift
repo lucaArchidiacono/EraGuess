@@ -66,8 +66,6 @@ public struct GameView: View {
 
     public var body: some View {
         content
-            .ignoresSafeArea(.all)
-            .statusBar(hidden: true)
             .toolbar {
                 CloseToolbar(placement: .topBarTrailing) {
                     dismiss()
