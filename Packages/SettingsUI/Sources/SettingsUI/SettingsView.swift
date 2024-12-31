@@ -71,7 +71,8 @@ public struct SettingsView: View {
 
     private var streamingServicesSection: some View {
         StreamingServiceSection(
-            musicKitPermissionProvider: musicKitPermissionProvider
+            musicKitPermissionProvider: musicKitPermissionProvider,
+            analyticsManager: analyticsManager
         )
     }
 

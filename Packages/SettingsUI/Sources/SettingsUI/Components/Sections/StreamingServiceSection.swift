@@ -5,6 +5,7 @@
 //  Created by Luca Archidiacono on 29.12.2024.
 //
 
+import AnalyticsDomain
 import EraGuessUI
 import Foundation
 import Models
@@ -18,6 +19,7 @@ struct StreamingServiceSection: View {
     @State private var musicKitPermissionState: Permission.Status = .notDetermined
 
     let musicKitPermissionProvider: MusicKitPermissionProvider
+    let analyticsManager: AnalyticsManager
 
     var body: some View {
         section
@@ -69,7 +71,9 @@ struct StreamingServiceSection: View {
                 action: {
                     Task {
                         if musicKitPermissionState == .notDetermined {
-                            musicKitPermissionState = await musicKitPermissionProvider.requestPermission()
+                            let status = await musicKitPermissionProvider.requestPermission()
+                            analyticsManager.track(event: .request(.permission(.musicKit, status: status)))
+                            musicKitPermissionState = status
                         }
 
                         if musicKitPermissionState == .authorized {
