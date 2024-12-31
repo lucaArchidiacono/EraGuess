@@ -65,11 +65,11 @@ public final class TelemetryDeckManager: AnalyticsManager {
 
                 switch permissionProvider {
                 case is NotificationPermissionProvider:
-                    defaultParameters["locationPermission"] = status.description
+                    defaultParameters["notificationPermission"] = status.description
                 case is MusicKitPermissionProvider:
                     defaultParameters["musicKitPermission"] = status.description
                 case is LocationPermissionProvider:
-                    defaultParameters["notificationPermission"] = status.description
+                    defaultParameters["locationPermission"] = status.description
                 default:
                     logger.warning("Unknown permission provider: \(permissionProvider)")
                     continue
