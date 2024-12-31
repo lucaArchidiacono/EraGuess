@@ -14,36 +14,16 @@ import SharedUI
 import StateFeature
 import SwiftUI
 
-struct Player {
-    let score: Int
-    let catalogSongs: [CatalogSong]
-}
-
-enum GameState {
-    case playing
-    case setup
-    case finished
-}
-
-enum GameMode {
-    case singlePlayer
-    case multiplayer
-}
-
 public struct GameView: View {
-    @Environment(\.dismiss) private var dismiss
-
     private let logger = Logger(label: String(describing: GameView.self))
+
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dismiss) private var dismiss
 
     @State private var appStateManager: AppStateManager
     @State private var userPreferencesManager: UserPreferencesManager
-
-    @State private var catalogSongs: [CatalogSong] = []
-    @State private var playbackState: PlaybackState = .stopped
-
-    @State private var players: [Player] = []
-    @State private var state: GameState = .setup
-    @State private var mode: GameMode = .singlePlayer
+    @State private var engine: GameEngine = .init()
 
     private let catalogSongService: CatalogSongService
     private let streamingServiceRepository: StreamingServiceRepository
@@ -71,6 +51,9 @@ public struct GameView: View {
                     dismiss()
                 }
             }
+            .environment(appStateManager)
+            .environment(userPreferencesManager)
+            .environment(engine)
             .onAppear {
                 analyticsManager.track(
                     event: .view(
@@ -78,114 +61,46 @@ public struct GameView: View {
                     )
                 )
             }
-            .onDisappear {
-                Task {
-                    await streamingServiceRepository.stop()
-                }
-            }
-            .task {
-                while true {
-                    playbackState = await streamingServiceRepository.playbackState
-                    try? await Task.sleep(for: .seconds(1))
-                }
-            }
             .onChange(of: appStateManager.availableLanguageSet, initial: true) { _, newValue in
                 Task {
                     let availableLanguageSets = LanguageSet.allCases.filter { newValue.contains($0) }
                     for availableLanguageSet in availableLanguageSets {
                         let newCatalogSongs = await catalogSongService.fetchCatalogSongs(for: availableLanguageSet)
-                        catalogSongs.append(contentsOf: newCatalogSongs)
+                        engine.updateCatalogSongs(using: newCatalogSongs)
                     }
                 }
             }
+    }
+
+    private func teardown() {
+        Task {
+            await streamingServiceRepository.stop()
+        }
     }
 
     private var content: some View {
-        VStack {
-            list
-            audioControls
-        }
-    }
+        ZStack {
+            backgroundGradient
+                .ignoresSafeArea()
 
-    private var list: some View {
-        List {
-            songs
-        }
-    }
-
-    private var songs: some View {
-        ForEach(catalogSongs) { catalogSong in
-            Button(catalogSong.title) {
-                Task {
-                    do {
-                        playbackState = await streamingServiceRepository.playbackState
-
-                        if playbackState == .playing {
-                            await streamingServiceRepository.stop()
-                        }
-
-                        let streamableSongs = try await streamingServiceRepository.searchSongs(catalogSong: catalogSong)
-                        guard let streamableSong = streamableSongs.first else { return }
-                        try await streamingServiceRepository.play(song: streamableSong)
-                        playbackState = await streamingServiceRepository.playbackState
-                    } catch {
-                        logger.error("Failed to search songs: \(error)")
-                    }
-                }
+            switch engine.state {
+            case .setup:
+                SetupView()
+            case .finished:
+                Text("Game Finished")
+            case .playing:
+                Text("Game playing")
             }
         }
     }
 
-    private var audioControls: some View {
-        HStack(spacing: 30) {
-            // Play Button
-            Button(action: {
-                Task {
-                    playbackState = await streamingServiceRepository.playbackState
-
-                    if playbackState == .paused {
-                        await streamingServiceRepository.resume()
-                    } else {
-                        await streamingServiceRepository.pause()
-                    }
-
-                    playbackState = await streamingServiceRepository.playbackState
-                }
-            }) {
-                Image(systemName: playbackState == .playing ? "pause.circle.fill" : "play.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.blue)
-                    .padding()
-                    .shadow(radius: 5)
-            }
-
-            // Stop Button
-            Button(action: {
-                Task {
-                    playbackState = await streamingServiceRepository.playbackState
-
-                    if playbackState == .playing {
-                        await streamingServiceRepository.stop()
-                    }
-
-                    playbackState = await streamingServiceRepository.playbackState
-                }
-            }) {
-                Image(systemName: "stop.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.red)
-                    .padding()
-                    .shadow(radius: 5)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: 100)
-        .background(.ultraThinMaterial)
-        .cornerRadius(12)
-        .shadow(radius: 10)
-        .padding()
+    private var backgroundGradient: some View {
+        LinearGradient(
+            colors: colorScheme == .dark ?
+                [Color(white: 0.1), Color(white: 0.2)] :
+                [.white, Color(white: 0.9)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 }

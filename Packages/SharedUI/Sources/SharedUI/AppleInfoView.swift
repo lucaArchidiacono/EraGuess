@@ -73,7 +73,7 @@ public struct AppleInfoView: View {
     }
 
     func button(_ title: String, action: @escaping (@escaping () -> Void) -> Void) -> some View {
-        Button {
+        ProminentButton {
             isLoading.toggle()
 
             action {
@@ -88,11 +88,7 @@ public struct AppleInfoView: View {
                         .fontWeight(.bold)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 8)
         }
-        .padding()
-        .buttonStyle(.borderedProminent)
     }
 
     private var bulletPoints: some View {
