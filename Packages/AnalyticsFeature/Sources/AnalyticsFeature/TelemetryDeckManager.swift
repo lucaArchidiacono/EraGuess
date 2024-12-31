@@ -30,16 +30,13 @@ public struct TelemetryDeckConfiguration: AnalyticsConfiguration {
 
 public final class TelemetryDeckManager: AnalyticsManager {
     private let logger = Logger(label: "TelemetryDeckManager")
-    private let notificationPermissionProvider: NotificationPermissionProvider
-    private let musicKitPermissionProvider: MusicKitPermissionProvider
+    private let permissionProviders: [any PermissionProvider]
 
     public init(
         configuration: TelemetryDeckConfiguration,
-        notificationPermissionProvider: NotificationPermissionProvider,
-        musicKitPermissionProvider: MusicKitPermissionProvider
+        permissionProviders: [any PermissionProvider]
     ) {
-        self.notificationPermissionProvider = notificationPermissionProvider
-        self.musicKitPermissionProvider = musicKitPermissionProvider
+        self.permissionProviders = permissionProviders
 
         let config = TelemetryDeck.Config(
             appID: configuration.apiKey
@@ -61,13 +58,23 @@ public final class TelemetryDeckManager: AnalyticsManager {
         Task { [weak self] in
             guard let self else { return }
 
-            let notificationPermissionStatus = await notificationPermissionProvider.fetchStatus()
-            let musicKitPermissionStatus = await musicKitPermissionProvider.fetchStatus()
+            var defaultParameters: [String: String] = [:]
 
-            let defaultParameters: [String: String] = [
-                "notificationPermission": notificationPermissionStatus.description,
-                "musicKitPermission": musicKitPermissionStatus.description,
-            ]
+            for permissionProvider in permissionProviders {
+                let status = await permissionProvider.fetchStatus()
+
+                switch permissionProvider {
+                case is NotificationPermissionProvider:
+                    defaultParameters["locationPermission"] = status.description
+                case is MusicKitPermissionProvider:
+                    defaultParameters["musicKitPermission"] = status.description
+                case is LocationPermissionProvider:
+                    defaultParameters["notificationPermission"] = status.description
+                default:
+                    logger.warning("Unknown permission provider: \(permissionProvider)")
+                    continue
+                }
+            }
 
             let parameters = event
                 .parameters

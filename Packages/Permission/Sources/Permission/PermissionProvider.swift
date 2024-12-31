@@ -6,7 +6,7 @@
 //
 
 @MainActor
-public protocol PermissionProvider {
+public protocol PermissionProvider: Sendable {
     func fetchStatus() async -> Permission.Status
 
     @discardableResult
