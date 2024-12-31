@@ -24,6 +24,38 @@ struct VinylDisk: View {
     }
 
     var body: some View {
+        content
+            .onChange(of: router.isPresenting, initial: true) { _, newValue in
+                guard newValue else { return }
+                rotation = 0
+            }
+            .rotationEffect(.degrees(rotation))
+            .scaleEffect(isPressed ? 0.9 : 1.0)
+            .onAppear {
+                withAnimation(.linear(duration: 6)
+                    .repeatForever(autoreverses: false))
+                {
+                    rotation = 360
+                }
+            }
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { _ in
+                        withAnimation(.spring(response: 0.3)) {
+                            isPressed = true
+                        }
+                    }
+                    .onEnded { _ in
+                        withAnimation(.spring(response: 0.3)) {
+                            isPressed = false
+                            hapticFeedbackManager.fireHaptic(of: .buttonPress)
+                            router.fullScreen = .game
+                        }
+                    }
+            )
+    }
+
+    private var content: some View {
         ZStack {
             // Outer ring
             Circle()
@@ -57,31 +89,6 @@ struct VinylDisk: View {
                 .fill(Color.black)
                 .frame(width: 8, height: 8)
         }
-        .rotationEffect(.degrees(rotation))
-        .scaleEffect(isPressed ? 0.9 : 1.0)
-        .onAppear {
-            withAnimation(.linear(duration: 6)
-                .repeatForever(autoreverses: false))
-            {
-                rotation = 360
-            }
-        }
-        // Use gesture instead of Button
-        .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in
-                    withAnimation(.spring(response: 0.3)) {
-                        isPressed = true
-                    }
-                }
-                .onEnded { _ in
-                    withAnimation(.spring(response: 0.3)) {
-                        isPressed = false
-                        hapticFeedbackManager.fireHaptic(of: .buttonPress)
-                        router.fullScreen = .game
-                    }
-                }
-        )
     }
 }
 
