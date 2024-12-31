@@ -2,7 +2,7 @@
 //  CatalogSongService.swift
 //  Services
 //
-//  Created by DG-SM-8669 on 29.12.2024.
+//  Created by Luca Archidiacono on 29.12.2024.
 //
 
 import Logger

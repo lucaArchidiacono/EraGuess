@@ -2,7 +2,7 @@
 //  PrivacyNavigationButton.swift
 //  SettingsFeature
 //
-//  Created by DG-SM-8669 on 24.12.2024.
+//  Created by Luca Archidiacono on 24.12.2024.
 //
 
 import SharedUI

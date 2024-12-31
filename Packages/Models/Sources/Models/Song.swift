@@ -2,7 +2,7 @@
 //  Song.swift
 //  Models
 //
-//  Created by DG-SM-8669 on 29.12.2024.
+//  Created by Luca Archidiacono on 29.12.2024.
 //
 
 import Foundation
@@ -56,7 +56,7 @@ public struct StreamableSong: Song {
         self.year = year
         self.previewURL = previewURL
     }
-    
+
     public init(
         _ item: StreamableSong,
         previewURL: URL

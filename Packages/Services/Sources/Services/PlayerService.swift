@@ -2,7 +2,7 @@
 //  PlayerService.swift
 //  Services
 //
-//  Created by DG-SM-8669 on 29.12.2024.
+//  Created by Luca Archidiacono on 29.12.2024.
 //
 
 import AVFoundation
@@ -46,7 +46,7 @@ public actor PlayerService {
         player.replaceCurrentItem(with: nil)
         playbackState = .stopped
     }
-    
+
     func resume() {
         guard playbackState == .paused else { return }
         logger.debug("Resuming audio")

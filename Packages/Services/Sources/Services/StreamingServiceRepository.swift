@@ -2,7 +2,7 @@
 //  StreamingServiceRepository.swift
 //  Services
 //
-//  Created by DG-SM-8669 on 29.12.2024.
+//  Created by Luca Archidiacono on 29.12.2024.
 //
 
 import Logger
@@ -47,7 +47,7 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
 
         return []
     }
-    
+
     public func searchSongsInAppleMusic(catalogSong: CatalogSong) async -> [StreamableSong] {
         do {
             let songs = try await appleMusicService.searchSongs(catalogSong: catalogSong)
@@ -77,7 +77,7 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
         logger.trace("Pausing the player")
         await playerService.resume()
     }
-    
+
     public func pause() async {
         logger.trace("Pausing the player")
         await playerService.pause()

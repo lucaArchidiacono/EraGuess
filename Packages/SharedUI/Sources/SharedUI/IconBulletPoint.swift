@@ -2,7 +2,7 @@
 //  IconBulletPoint.swift
 //  SharedUI
 //
-//  Created by DG-SM-8669 on 31.12.2024.
+//  Created by Luca Archidiacono on 31.12.2024.
 //
 
 import Foundation

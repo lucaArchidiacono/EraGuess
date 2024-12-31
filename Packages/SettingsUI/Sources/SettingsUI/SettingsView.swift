@@ -2,16 +2,16 @@
 //  SettingsView.swift
 //  SettingsUI
 //
-//  Created by DG-SM-8669 on 29.12.2024.
+//  Created by Luca Archidiacono on 29.12.2024.
 //
 
 import AnalyticsDomain
 import EraGuessUI
 import Permission
 import SharedUI
+import StateFeature
 import SwiftUI
 import UINavigation
-import StateFeature
 
 public struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
@@ -68,13 +68,13 @@ public struct SettingsView: View {
     private var languageSetSection: some View {
         LanguageSetSection()
     }
-    
+
     private var streamingServicesSection: some View {
         StreamingServiceSection(
             musicKitPermissionProvider: musicKitPermissionProvider
         )
     }
-    
+
     private var userPreferencesSection: some View {
         UserPreferencesSection(
             musicKitPermissionProvider: musicKitPermissionProvider

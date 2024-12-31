@@ -2,7 +2,7 @@
 //  GETTracksRequest.swift
 //  SpotifyAPI
 //
-//  Created by DG-SM-8669 on 30.12.2024.
+//  Created by Luca Archidiacono on 30.12.2024.
 //
 
 import Foundation

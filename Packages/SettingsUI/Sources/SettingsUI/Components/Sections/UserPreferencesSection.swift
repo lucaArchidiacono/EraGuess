@@ -2,7 +2,7 @@
 //  UserPreferencesSection.swift
 //  SettingsUI
 //
-//  Created by DG-SM-8669 on 29.12.2024.
+//  Created by Luca Archidiacono on 29.12.2024.
 //
 
 import Foundation
@@ -21,9 +21,9 @@ struct UserPreferencesSection: View {
             AppLanguageNavigationButton()
         } footer: {
             Text("""
-                You can change the language of the app and give permission to access Apple Music.
-                No worries, you do not need to have an Apple Music subscription.
-                """)
+            You can change the language of the app and give permission to access Apple Music.
+            No worries, you do not need to have an Apple Music subscription.
+            """)
         }
     }
 }
