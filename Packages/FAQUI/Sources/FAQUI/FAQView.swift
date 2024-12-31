@@ -11,6 +11,8 @@ import SharedUI
 import SwiftUI
 
 public struct FAQView: View {
+    @Environment(\.dismiss) private var dismiss
+
     private let analyticsManager: AnalyticsManager
 
     public init(
@@ -20,12 +22,21 @@ public struct FAQView: View {
     }
 
     public var body: some View {
-        AppleInfoView(config: Self.appleInfoConfig())
+        content
+            .toolbar {
+                TextToolbar("Done", placement: .topBarTrailing) {
+                    dismiss()
+                }
+            }
             .onAppear {
                 analyticsManager.track(
                     event: .view(name: String(describing: FAQView.self))
                 )
             }
+    }
+
+    private var content: some View {
+        AppleInfoView(config: Self.appleInfoConfig())
     }
 }
 

@@ -55,7 +55,7 @@ public struct AppleInfoView: View {
         Text(config.title)
             .font(.largeTitle)
             .fontWeight(.bold)
-            .padding(.top, 50)
+            .padding(.top, 30)
             .padding(.horizontal)
     }
 

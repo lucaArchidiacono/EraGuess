@@ -89,7 +89,7 @@ extension ContentView {
         case .game:
             gameFeature
         case .faq:
-            FAQView()
+            faqFeature
         }
     }
 }
@@ -149,6 +149,16 @@ extension ContentView {
         case let .email(data):
             AppleMailView(
                 emailData: data,
+                analyticsManager: analyticsManager
+            )
+        }
+    }
+}
+
+extension ContentView {
+    private var faqFeature: some View {
+        NavigationStack {
+            FAQView(
                 analyticsManager: analyticsManager
             )
         }
