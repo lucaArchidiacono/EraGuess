@@ -7,6 +7,7 @@
 
 import Foundation
 import Fundamentals
+import Permission
 
 public enum Event: Sendable {
     public enum State: String, Sendable {
@@ -15,13 +16,14 @@ public enum Event: Sendable {
         case inactive
     }
 
-    public enum Permission: String, Sendable {
+    public enum PermissionType: String, Sendable {
         case notification = "Notification"
         case gps = "GPS"
+        case musicKit = "MusicKit"
     }
 
     public enum Request: Sendable {
-        case permission(Permission)
+        case permission(PermissionType, status: Permission.Status)
 
         package var rawValue: String {
             switch self {
@@ -77,8 +79,9 @@ public enum Event: Sendable {
             signalName.append(type.rawValue)
 
             switch type {
-            case let .permission(type):
+            case let .permission(type, value):
                 signalName.append(type.rawValue)
+                signalName.append(value.description)
             }
         case let .feature(feature, _):
             signalName.append(rawValue)

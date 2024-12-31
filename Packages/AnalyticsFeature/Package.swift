@@ -44,6 +44,8 @@ let package = Package(
         .target(
             name: "AnalyticsDomain",
             dependencies: [
+                "Fundamentals",
+                "Permission",
                 .product(name: "TelemetryDeck", package: "swiftsdk"),
             ]
         ),
