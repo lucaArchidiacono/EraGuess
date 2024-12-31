@@ -5,18 +5,18 @@
 //  Created by DG-SM-8669 on 29.12.2024.
 //
 
-import Foundation
-import Permission
-import SwiftUI
 import EraGuessUI
-import StateFeature
+import Foundation
 import Models
+import Permission
+import StateFeature
+import SwiftUI
 
 struct StreamingServiceSection: View {
     @Environment(UserPreferencesManager.self) private var userPreferencesManager
-    
+
     @State private var musicKitPermissionState: Permission.Status = .notDetermined
-    
+
     let musicKitPermissionProvider: MusicKitPermissionProvider
 
     var body: some View {
@@ -24,13 +24,13 @@ struct StreamingServiceSection: View {
             .listRowBackground(Color.clear)
             .task {
                 musicKitPermissionState = await musicKitPermissionProvider.fetchStatus()
-                
+
                 if musicKitPermissionState != .authorized {
                     userPreferencesManager.$musicServices.withLock { _ = $0.remove(.appleMusic) }
                 }
             }
     }
-    
+
     private var section: some View {
         Section {
             content
@@ -39,12 +39,12 @@ struct StreamingServiceSection: View {
             Text("Streaming Services")
         } footer: {
             Text("""
-                Keep in mind if you do give permission to use Apple Music, Spotify will be used and can not be disabled.
-                If you allow Apple Music, it will be used as the primary service and you are able to disable Spotify.
-                """)
+            Keep in mind if you do give permission to use Apple Music, Spotify will be used and can not be disabled.
+            If you allow Apple Music, it will be used as the primary service and you are able to disable Spotify.
+            """)
         }
     }
-    
+
     private var content: some View {
         ForEach(MusicService.allCases, id: \.self) { musicService in
             selectionCard(musicService)
@@ -62,7 +62,6 @@ struct StreamingServiceSection: View {
                     title: "Apple Music",
                     description: """
                     No subscription required.
-                    Use Apple Music to play the music as preview.
                     Its the preferred service with better quality and better music matching.
                     """
                 ),
@@ -72,7 +71,7 @@ struct StreamingServiceSection: View {
                         if musicKitPermissionState == .notDetermined {
                             musicKitPermissionState = await musicKitPermissionProvider.requestPermission()
                         }
-                        
+
                         if musicKitPermissionState == .authorized {
                             if userPreferencesManager.musicServices.contains(service) {
                                 userPreferencesManager.$musicServices.withLock { _ = $0.remove(service) }
@@ -85,8 +84,8 @@ struct StreamingServiceSection: View {
             )
             .disabled(
                 musicKitPermissionState == .denied ||
-                userPreferencesManager.musicServices.contains(service) &&
-                userPreferencesManager.musicServices.count == 1
+                    userPreferencesManager.musicServices.contains(service) &&
+                    userPreferencesManager.musicServices.count == 1
             )
         case .spotify:
             SelectionCard(
@@ -95,7 +94,6 @@ struct StreamingServiceSection: View {
                     title: "Spotify",
                     description: """
                     No subscription required.
-                    Use Spotify to play the music as preview.
                     It's a good alternative and is used as fallback when Apple Music is selected.
                     """
                 ),
@@ -110,8 +108,8 @@ struct StreamingServiceSection: View {
             )
             .disabled(
                 musicKitPermissionState != .authorized ||
-                userPreferencesManager.musicServices.contains(service) &&
-                userPreferencesManager.musicServices.count == 1
+                    userPreferencesManager.musicServices.contains(service) &&
+                    userPreferencesManager.musicServices.count == 1
             )
         }
     }

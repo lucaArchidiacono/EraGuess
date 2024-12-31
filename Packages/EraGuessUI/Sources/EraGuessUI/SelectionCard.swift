@@ -45,52 +45,49 @@ public struct SelectionCard: View {
 
     public var body: some View {
         Button(action: action) {
-            ZStack {
-                // Background
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .top) {
+                    if let header = config.header {
+                        switch header {
+                        case let .text(string):
+                            Text(string)
+                                .font(.headline)
+                        case let .image(image):
+                            image
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundStyle(.primary)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 32, height: 32)
+                        }
+                    }
+
+                    Spacer()
+
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.white, .green)
+                            .font(.title3)
+                            .transition(.scale.combined(with: .opacity))
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(config.title)
+                        .font(.title3)
+
+                    Text(config.description)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+            }
+            .background {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(Color(.systemBackground))
-
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .top) {
-                        if let header = config.header {
-                            switch header {
-                            case let .text(string):
-                                Text(string)
-                                    .font(.headline)
-                            case let .image(image):
-                                image
-                                    .resizable()
-                                    .renderingMode(.template)
-                                    .foregroundStyle(.primary)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 32, height: 32)
-                            }
-                        }
-
-                        Spacer()
-
-                        if isSelected {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundStyle(.white, .green)
-                                .font(.title3)
-                                .transition(.scale.combined(with: .opacity))
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.top)
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(config.title)
-                            .font(.title3)
-
-                        Text(config.description)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(3)
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 12)
-                }
             }
             .contentShape(Rectangle())
         }
