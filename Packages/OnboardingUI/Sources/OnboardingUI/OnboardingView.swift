@@ -40,6 +40,7 @@ public struct OnboardingView: View {
         TabView(selection: $currentIndex) {
             ForEach(0 ..< infoConfigs.count, id: \.self) { index in
                 AppleInfoView(config: infoConfigs[index])
+                    .padding(.top, 50)
                     .gesture(DragGesture())
             }
         }
