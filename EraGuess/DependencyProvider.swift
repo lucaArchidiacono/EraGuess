@@ -63,8 +63,8 @@ struct DependencyProvider {
         )
         analyticsManager = TelemetryDeckManager(
             configuration: analyticsConfiguration,
-            locationPermissionProvider: locationPermissionProvider,
-            notificationPermissionProvider: notificationPermissionProvider
+            notificationPermissionProvider: notificationPermissionProvider,
+            musicKitPermissionProvider: musicKitPermissionProvider
         )
 
         navigationManager = NavigationManager()
@@ -82,7 +82,7 @@ struct DependencyProvider {
             clientSecret: EraGuessShared.spotifyAPIKey,
             api: spotifyAPI
         )
-        
+
         let playerService = PlayerService()
 
         streamingServiceRepository = StreamingServiceRepository(

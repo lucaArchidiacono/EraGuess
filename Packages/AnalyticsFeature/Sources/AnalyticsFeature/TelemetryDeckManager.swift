@@ -30,16 +30,16 @@ public struct TelemetryDeckConfiguration: AnalyticsConfiguration {
 
 public final class TelemetryDeckManager: AnalyticsManager {
     private let logger = Logger(label: "TelemetryDeckManager")
-    private let locationPermissionProvider: LocationPermissionProvider
     private let notificationPermissionProvider: NotificationPermissionProvider
+    private let musicKitPermissionProvider: MusicKitPermissionProvider
 
     public init(
         configuration: TelemetryDeckConfiguration,
-        locationPermissionProvider: LocationPermissionProvider,
-        notificationPermissionProvider: NotificationPermissionProvider
+        notificationPermissionProvider: NotificationPermissionProvider,
+        musicKitPermissionProvider: MusicKitPermissionProvider
     ) {
-        self.locationPermissionProvider = locationPermissionProvider
         self.notificationPermissionProvider = notificationPermissionProvider
+        self.musicKitPermissionProvider = musicKitPermissionProvider
 
         let config = TelemetryDeck.Config(
             appID: configuration.apiKey
@@ -61,12 +61,12 @@ public final class TelemetryDeckManager: AnalyticsManager {
         Task { [weak self] in
             guard let self else { return }
 
-            let locationPermissionStatus = await locationPermissionProvider.fetchStatus()
             let notificationPermissionStatus = await notificationPermissionProvider.fetchStatus()
+            let musicKitPermissionStatus = await musicKitPermissionProvider.fetchStatus()
 
             let defaultParameters: [String: String] = [
-                "locationPermission": locationPermissionStatus.description,
                 "notificationPermission": notificationPermissionStatus.description,
+                "musicKitPermission": musicKitPermissionStatus.description,
             ]
 
             let parameters = event
