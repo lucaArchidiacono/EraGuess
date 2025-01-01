@@ -9,10 +9,12 @@ import Foundation
 import SharedUI
 import SwiftUI
 import HapticFeedbackFeature
+import AnalyticsDomain
 
 struct SetupView: View {
     @Environment(GameEngine.self) private var engine
     @Environment(\.hapticFeedbackManager) private var hapticFeedbackManager
+    @Environment(\.analyticsManager) private var analyticsManager
 
     @State private var currentCount: Int = 3
     @State private var opacityValue: Double = 0
@@ -142,7 +144,14 @@ extension SetupView {
     }
 }
 
+#if DEBUG
+import AnalyticsFeature
+
 #Preview {
     SetupView()
         .environment(GameEngine())
+        .environment(\.analyticsManager, MockAnalyticsManager())
+        .environment(\.hapticFeedbackManager, HapticFeedbackManager())
 }
+
+#endif

@@ -59,6 +59,7 @@ public struct GameView: View {
             .environment(userPreferencesManager)
             .environment(engine)
             .environment(\.hapticFeedbackManager, hapticFeedbackManager)
+            .environment(\.analyticsManager, analyticsManager)
             .onAppear {
                 analyticsManager.track(
                     event: .view(
