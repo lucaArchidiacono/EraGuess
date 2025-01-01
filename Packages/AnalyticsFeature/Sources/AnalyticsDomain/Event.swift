@@ -33,14 +33,15 @@ public enum Event: Sendable {
         }
     }
 
-    public enum Feature: Sendable {
-        case intent(String)
+    public protocol FeatureProtocol: Sendable {
+        var rawValue: String { get }
+    }
+    
+    public struct Feature: FeatureProtocol {
+        public let rawValue: String
 
-        package var rawValue: String {
-            switch self {
-            case .intent:
-                "Intent"
-            }
+        public init(_ rawValue: String) {
+            self.rawValue = rawValue
         }
     }
 
