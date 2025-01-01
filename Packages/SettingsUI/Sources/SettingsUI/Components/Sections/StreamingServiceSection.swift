@@ -15,11 +15,10 @@ import SwiftUI
 
 struct StreamingServiceSection: View {
     @Environment(UserPreferencesManager.self) private var userPreferencesManager
+    @Environment(\.musicKitPermissionProvider) private var musicKitPermissionProvider
+    @Environment(\.analyticsManager) private var analyticsManager
 
     @State private var musicKitPermissionState: Permission.Status = .notDetermined
-
-    let musicKitPermissionProvider: MusicKitPermissionProvider
-    let analyticsManager: AnalyticsManager
 
     var body: some View {
         section

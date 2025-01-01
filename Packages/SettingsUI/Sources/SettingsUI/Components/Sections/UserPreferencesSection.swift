@@ -10,7 +10,7 @@ import Permission
 import SwiftUI
 
 struct UserPreferencesSection: View {
-    public let musicKitPermissionProvider: MusicKitPermissionProvider
+    @Environment(\.musicKitPermissionProvider) private var musicKitPermissionProvider
 
     var body: some View {
         Section {

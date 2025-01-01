@@ -47,6 +47,8 @@ public struct SettingsView: View {
             .environment(router)
             .environment(userPreferencesManager)
             .environment(appStateManager)
+            .environment(\.musicKitPermissionProvider, musicKitPermissionProvider)
+            .environment(\.analyticsManager, analyticsManager)
             .onAppear {
                 analyticsManager.track(
                     event: .view(
@@ -70,16 +72,11 @@ public struct SettingsView: View {
     }
 
     private var streamingServicesSection: some View {
-        StreamingServiceSection(
-            musicKitPermissionProvider: musicKitPermissionProvider,
-            analyticsManager: analyticsManager
-        )
+        StreamingServiceSection()
     }
 
     private var userPreferencesSection: some View {
-        UserPreferencesSection(
-            musicKitPermissionProvider: musicKitPermissionProvider
-        )
+        UserPreferencesSection()
     }
 
     private var extrasSection: some View {
