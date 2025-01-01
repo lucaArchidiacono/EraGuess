@@ -6,18 +6,22 @@
 //
 
 public enum LanguageSet: Codable, Sendable, CaseIterable {
-    case enDe
+    case enDE
+    case enCH
 
     public var code: String {
         switch self {
-        case .enDe: "en-DE"
+        case .enDE: "en-DE"
+        case .enCH: "en-CH"
         }
     }
 
     public var localizedString: String {
         switch self {
-        case .enDe:
+        case .enDE:
             "English/German"
+        case .enCH:
+            "English/Swiss German"
         }
     }
 }

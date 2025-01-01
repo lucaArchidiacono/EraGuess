@@ -21,8 +21,10 @@ struct LanguageSetSection: View {
 
     private var content: some View {
         ForEach(LanguageSet.allCases, id: \.self) { languageSet in
-            selectionCard(languageSet)
-                .listRowSeparator(.hidden)
+            LanguageSelectionCard(
+                languageSet: languageSet
+            )
+            .listRowSeparator(.hidden)
         }
     }
 
@@ -33,38 +35,5 @@ struct LanguageSetSection: View {
         } header: {
             Text("Language Set")
         }
-    }
-
-    @ViewBuilder
-    private func selectionCard(_ languageSet: LanguageSet) -> some View {
-        switch languageSet {
-        case .enDe:
-            SelectionCard(
-                config: .init(
-                    header: .text("🇺🇸🇩🇪"),
-                    title: "English/German",
-                    description: """
-                    Listen to music from the US and Germany.    
-                    """
-                ),
-                isSelected: appStateManager.availableLanguageSet.contains(languageSet),
-                action: {
-                    appStateManager.$availableLanguageSet.withLock { _ = $0.insert(languageSet) }
-                }
-            )
-            .disabled(
-                appStateManager.availableLanguageSet.contains(languageSet)
-            )
-        }
-        SelectionCard(
-            config: .init(
-                header: .text("🇺🇸🇨🇭"),
-                title: "English/Swiss German",
-                description: "Coming Soon..."
-            ),
-            isSelected: false,
-            action: {}
-        )
-        .disabled(true)
     }
 }

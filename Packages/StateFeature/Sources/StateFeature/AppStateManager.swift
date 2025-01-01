@@ -18,7 +18,7 @@ public final class AppStateManager {
 
     @ObservationIgnored
     @Shared(.inMemory("selectedLanguageSet"))
-    public var availableLanguageSet: Set<LanguageSet> = [.enDe]
+    public var availableLanguageSet: Set<LanguageSet> = [.enDE]
 
     public init() {}
 }
