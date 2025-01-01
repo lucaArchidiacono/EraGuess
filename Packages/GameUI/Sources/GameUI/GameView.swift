@@ -66,6 +66,17 @@ public struct GameView: View {
                     )
                 )
             }
+            .onDisappear {
+                Task {
+                    await streamingServiceRepository.stop()
+                }
+            }
+            .onChange(of: scenePhase, initial: true) { _, newValue in
+                guard newValue != .active else { return }
+                Task {
+                    await streamingServiceRepository.pause()
+                }
+            }
             .onChange(of: appStateManager.availableLanguageSet, initial: true) { _, newValue in
                 Task {
                     let availableLanguageSets = LanguageSet.allCases.filter { newValue.contains($0) }
@@ -75,12 +86,6 @@ public struct GameView: View {
                     }
                 }
             }
-    }
-
-    private func teardown() {
-        Task {
-            await streamingServiceRepository.stop()
-        }
     }
 
     private var content: some View {
