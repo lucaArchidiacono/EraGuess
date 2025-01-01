@@ -9,19 +9,29 @@ import Foundation
 import SwiftUI
 
 struct GameModeButton: View {
-    let title: String
-    let systemImage: String
-    let isSelected: Bool
-    let action: () -> Void
+    @Environment(GameEngine.self) private var engine
+    @Environment(\.hapticFeedbackManager) private var hapticFeedbackManager
+    
+    let mode: GameMode
 
+    private var isSelected: Bool {
+        engine.mode == mode
+    }
+    
     var body: some View {
-        Button(action: action) {
+        Button {
+            hapticFeedbackManager.fireHaptic(of: .buttonPress)
+            
+            withAnimation {
+                engine.setMode(mode)
+            }
+        } label: {
             VStack(spacing: 12) {
-                Image(systemName: systemImage)
+                Image(systemName: mode == .singlePlayer ? "person.fill" : "person.3.fill")
                     .font(.system(size: 40))
                     .foregroundStyle(isSelected ? .white : .primary)
 
-                Text(title)
+                Text(mode == .singlePlayer ? "Single Player" : "Multiplayer")
                     .font(.headline)
                     .foregroundStyle(isSelected ? .white : .primary)
             }

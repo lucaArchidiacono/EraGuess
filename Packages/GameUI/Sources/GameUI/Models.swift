@@ -36,7 +36,7 @@ enum GameState {
     case finished
 }
 
-enum GameMode {
+enum GameMode: CaseIterable {
     case singlePlayer
     case multiplayer
 }

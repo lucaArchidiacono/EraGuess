@@ -102,7 +102,8 @@ extension ContentView {
                 userPreferencesManager: userPreferencesManager,
                 catalogSongService: catalogSongService,
                 streamingServiceRepository: streamingServiceRepository,
-                analyticsManager: analyticsManager
+                analyticsManager: analyticsManager,
+                hapticFeedbackManager: hapticFeedbackManager
             )
         }
     }

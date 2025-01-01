@@ -8,14 +8,16 @@
 import Foundation
 import SharedUI
 import SwiftUI
+import HapticFeedbackFeature
 
 struct SetupView: View {
     @Environment(GameEngine.self) private var engine
+    @Environment(\.hapticFeedbackManager) private var hapticFeedbackManager
 
     @State private var currentCount: Int = 3
     @State private var opacityValue: Double = 0
     @State private var showingCountdown: Bool = false
-
+    
     var body: some View {
         VStack(spacing: 32) {
             if !showingCountdown {
@@ -26,69 +28,74 @@ struct SetupView: View {
         }
         .padding()
     }
+}
 
-    var setupContent: some View {
+// MARK: - Setup
+extension SetupView {
+    private var setupContent: some View {
         VStack(spacing: 24) {
+            gameModeSection
+
+            if engine.mode == .multiplayer {
+                teamNumberSection
+            }
+
+            Spacer()
+            continueButton
+        }
+        .transition(.opacity)
+    }
+    
+    private var gameModeSection: some View {
+        VStack {
             Text("Choose Game Mode")
                 .font(.title)
                 .fontWeight(.bold)
 
             HStack(spacing: 20) {
-                GameModeButton(
-                    title: "Single Player",
-                    systemImage: "person.fill",
-                    isSelected: engine.mode == .singlePlayer
-                ) {
-                    engine.setMode(.singlePlayer)
+                ForEach(GameMode.allCases, id: \.self) { mode in
+                    GameModeButton(
+                        mode: mode
+                    )
+                    .disabled(engine.mode == mode)
                 }
-                .disabled(engine.mode == .singlePlayer)
-
-                GameModeButton(
-                    title: "Multiplayer",
-                    systemImage: "person.3.fill",
-                    isSelected: engine.mode == .multiplayer
-                ) {
-                    engine.setMode(.multiplayer)
-                }
-                .disabled(engine.mode == .multiplayer)
             }
+        }
+    }
+    
+    private var teamNumberSection: some View {
+        VStack(spacing: 16) {
+            Text("Number of Team")
+                .font(.title2)
+                .fontWeight(.semibold)
 
-            if engine.mode == .multiplayer {
-                VStack(spacing: 16) {
-                    Text("Number of Team")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-
-                    HStack(spacing: 16) {
-                        ForEach(engine.minTeams ... engine.maxTeams, id: \.self) { number in
-                            TeamNumberButton(
-                                number: number,
-                                isSelected: engine.teams.count == number && engine.mode == .multiplayer
-                            ) {
-                                engine.setTeams(number)
-                            }
-                        }
-                    }
+            HStack(spacing: 16) {
+                ForEach(engine.minTeams ... engine.maxTeams, id: \.self) { number in
+                    TeamNumberButton(
+                        number: number
+                    )
                 }
-                .transition(.opacity)
             }
-
-            Spacer()
-
-            ProminentButton {
-                withAnimation {
-                    showingCountdown = true
-                }
-            } label: {
-                Text("Continue")
-                    .font(.title3.weight(.semibold))
-            }
-            .disabled(engine.teams.isEmpty)
         }
         .transition(.opacity)
     }
+    
+    private var continueButton: some View {
+        ProminentButton {
+            withAnimation {
+                showingCountdown = true
+            }
+        } label: {
+            Text("Continue")
+                .font(.title3.weight(.semibold))
+        }
+        .disabled(engine.teams.isEmpty)
+    }
+}
 
-    var countdownContent: some View {
+// MARK: - Countdown
+extension SetupView {
+    private var countdownContent: some View {
         VStack(spacing: 16) {
             Text("Game starts in")
                 .font(.title2)

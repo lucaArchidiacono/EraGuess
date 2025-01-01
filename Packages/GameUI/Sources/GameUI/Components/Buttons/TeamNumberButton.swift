@@ -9,12 +9,24 @@ import Foundation
 import SwiftUI
 
 struct TeamNumberButton: View {
+    @Environment(GameEngine.self) private var engine
+    @Environment(\.hapticFeedbackManager) private var hapticFeedbackManager
+    
     let number: Int
-    let isSelected: Bool
-    let action: () -> Void
+    
+    private var isSelected: Bool {
+        engine.teams.count == number &&
+        engine.mode == .multiplayer
+    }
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            hapticFeedbackManager.fireHaptic(of: .buttonPress)
+            
+            withAnimation {
+                engine.setTeams(number)
+            }
+        } label: {
             VStack(spacing: 8) {
                 Text("\(number)")
                     .font(.system(size: 32, weight: .bold))

@@ -6,32 +6,16 @@
 //
 
 import SwiftUI
+import HapticFeedbackFeature
 
-private struct TeamsKey: EnvironmentKey {
-    static let defaultValue: [TeamType] = []
-}
-
-private struct GameStateKey: EnvironmentKey {
-    static let defaultValue: GameState = .setup
-}
-
-private struct GameModeKey: EnvironmentKey {
-    static let defaultValue: GameMode = .singlePlayer
+@MainActor
+private struct HapticFeedbackManagerKey: @preconcurrency EnvironmentKey {
+    static let defaultValue: HapticFeedbackManager = .init()
 }
 
 extension EnvironmentValues {
-    var teams: [TeamType] {
-        get { self[TeamsKey.self] }
-        set { self[TeamsKey.self] = newValue }
-    }
-
-    var state: GameState {
-        get { self[GameStateKey.self] }
-        set { self[GameStateKey.self] = newValue }
-    }
-
-    var mode: GameMode {
-        get { self[GameModeKey.self] }
-        set { self[GameModeKey.self] = newValue }
+    var hapticFeedbackManager: HapticFeedbackManager {
+        get { self[HapticFeedbackManagerKey.self] }
+        set { self[HapticFeedbackManagerKey.self] = newValue }
     }
 }

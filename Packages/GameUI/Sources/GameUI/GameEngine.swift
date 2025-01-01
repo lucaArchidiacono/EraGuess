@@ -27,9 +27,7 @@ final class GameEngine {
     func startGame() {
         guard state != .playing else { return }
 
-        withAnimation {
-            self.state = .playing
-        }
+        self.state = .playing
     }
 
     func setMode(_ mode: GameMode) {
@@ -68,18 +66,14 @@ final class GameEngine {
     private func setupSinglePlayer() {
         guard state == .setup else { return }
 
-        withAnimation {
-            mode = .singlePlayer
-            setTeams(1)
-        }
+        mode = .singlePlayer
+        setTeams(1)
     }
 
     private func setupMultiPlayer() {
         guard state == .setup else { return }
 
-        withAnimation {
-            mode = .multiplayer
-            setTeams(0)
-        }
+        mode = .multiplayer
+        setTeams(0)
     }
 }

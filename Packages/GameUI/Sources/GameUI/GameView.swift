@@ -7,6 +7,7 @@
 
 import AnalyticsDomain
 import EraGuessUI
+import HapticFeedbackFeature
 import Logger
 import Models
 import Services
@@ -28,13 +29,15 @@ public struct GameView: View {
     private let catalogSongService: CatalogSongService
     private let streamingServiceRepository: StreamingServiceRepository
     private let analyticsManager: AnalyticsManager
+    private let hapticFeedbackManager: HapticFeedbackManager
 
     public init(
         appStateManager: AppStateManager,
         userPreferencesManager: UserPreferencesManager,
         catalogSongService: CatalogSongService,
         streamingServiceRepository: StreamingServiceRepository,
-        analyticsManager: AnalyticsManager
+        analyticsManager: AnalyticsManager,
+        hapticFeedbackManager: HapticFeedbackManager
     ) {
         _appStateManager = State(wrappedValue: appStateManager)
         _userPreferencesManager = State(wrappedValue: userPreferencesManager)
@@ -42,6 +45,7 @@ public struct GameView: View {
         self.catalogSongService = catalogSongService
         self.streamingServiceRepository = streamingServiceRepository
         self.analyticsManager = analyticsManager
+        self.hapticFeedbackManager = hapticFeedbackManager
     }
 
     public var body: some View {
@@ -54,6 +58,7 @@ public struct GameView: View {
             .environment(appStateManager)
             .environment(userPreferencesManager)
             .environment(engine)
+            .environment(\.hapticFeedbackManager, hapticFeedbackManager)
             .onAppear {
                 analyticsManager.track(
                     event: .view(
