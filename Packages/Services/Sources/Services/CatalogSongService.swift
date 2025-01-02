@@ -19,11 +19,11 @@ public struct CatalogSongServiceImpl: CatalogSongService {
     public init() {}
 
     public func fetchCatalogSongs(for languageSet: LanguageSet) async -> [CatalogSong] {
-        logger.trace("Fetching catalog songs for language set: \(languageSet)")
+        logger.info("Fetching catalog songs for language set: \(languageSet)")
 
         let songs = await store.fetch(using: languageSet)
 
-        logger.notice("Fetched \(songs.count) catalog songs")
+        logger.info("Fetched \(songs.count) catalog songs")
 
         return songs
     }

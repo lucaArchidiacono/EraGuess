@@ -27,14 +27,13 @@ public struct SpotifyAPIImpl: SpotifyAPI {
     }
 
     public func authenticate(clientId: String, clientSecret: String) async throws -> String {
-        logger.trace("Authenticating with clientID: \(clientId) & clientSecret: \(clientSecret)")
+        logger.debug("Authenticating with clientID: \(clientId) & clientSecret: \(clientSecret)")
         let request = POSTAuthenticationRequest(
             clientId: clientId,
             clientSecret: clientSecret
         )
 
         let response: POSTAuthenticationResponse = try await network.request(request: request)
-        logger.notice("Successfully authenticated with Spotify")
         return response.accessToken
     }
 
@@ -43,7 +42,7 @@ public struct SpotifyAPIImpl: SpotifyAPI {
         track: String,
         artist: String
     ) async throws -> [StreamableSong] {
-        logger.trace("Searching tracks with track: \(track), artist: \(artist)")
+        logger.debug("Searching tracks with track: \(track), artist: \(artist)")
         let request = GETTracksRequest(
             token: token,
             track: track,
@@ -76,8 +75,6 @@ public struct SpotifyAPIImpl: SpotifyAPI {
             }
             return results
         }
-
-        logger.notice("Successfully fetched tracks")
 
         return results
     }

@@ -69,22 +69,22 @@ public struct StreamingServiceRepository: StreamingService, Sendable {
     }
 
     public func play(song: StreamableSong) async throws {
-        logger.trace("Playing song: \(song.title) by \(song.artist)")
+        logger.info("Playing song: \(song.title) by \(song.artist)")
         await playerService.play(url: song.previewURL)
     }
 
     public func resume() async {
-        logger.trace("Pausing the player")
+        logger.info("Pausing the player")
         await playerService.resume()
     }
 
     public func pause() async {
-        logger.trace("Pausing the player")
+        logger.info("Pausing the player")
         await playerService.pause()
     }
 
     public func stop() async {
-        logger.trace("Stopping the player")
+        logger.info("Stopping the player")
         await playerService.stop()
     }
 }

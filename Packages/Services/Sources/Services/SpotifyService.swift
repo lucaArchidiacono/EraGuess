@@ -77,13 +77,13 @@ public struct SpotifyService: StreamingService {
 
     public func searchSongs(catalogSong: CatalogSong) async throws -> [StreamableSong] {
         let token = try await getValidToken()
-        logger.trace("Searching for songs with: \(catalogSong)")
+        logger.info("Searching for songs with: \(catalogSong)")
         let streamableSongs = try await api.search(
             using: token,
             track: catalogSong.title,
             artist: catalogSong.artist
         )
-        logger.notice("Found \(streamableSongs.count) songs")
+        logger.info("Found \(streamableSongs.count) songs")
         return streamableSongs
     }
 
@@ -116,9 +116,9 @@ public struct SpotifyService: StreamingService {
     }
 
     private func authenticate() async throws -> String {
-        logger.trace("Authenticating with Spotify")
+        logger.info("Authenticating with Spotify")
         let token = try await api.authenticate(clientId: clientId, clientSecret: clientSecret)
-        logger.notice("Authenticated with Spotify")
+        logger.info("Successfullyy authenticated with Spotify")
         return token
     }
 }
