@@ -8,6 +8,8 @@
 import EraGuessShared
 import Logger
 import UIKit
+import SubscriptionFeature
+import AnalyticsFeature
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     private var logger: Logger!
@@ -17,6 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureLogging()
         configureDependencyProvider()
+        configureAnalytics()
         return true
     }
 
@@ -29,6 +32,22 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         logBuilder.install()
 
         logger = Logger(label: String(describing: AppDelegate.self))
+    }
+    
+    private func configureAnalytics() {
+        if let telemetryDeckManager = dependencyProvider.analyticsManager as? TelemetryDeckManager,
+           let revenueCatManager = dependencyProvider.subscriptionManager as? RevenueCatManager
+        {
+            Task {
+                telemetryDeckManager.updateDefault(userID: UIDevice.current.identifierForVendor!.uuidString)
+                let hashedDefaultUser = await telemetryDeckManager.hashedDefaultUser
+                let attributes = [
+                    "$telemetryDeckUserId": hashedDefaultUser,
+                    "$telemetryDeckAppId": telemetryDeckManager.appID,
+                ]
+                revenueCatManager.updateAttributions(attributes)
+            }
+        }
     }
 
     private func configureDependencyProvider() {
