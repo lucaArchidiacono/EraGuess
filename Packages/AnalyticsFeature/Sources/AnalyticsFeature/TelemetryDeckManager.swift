@@ -32,14 +32,24 @@ public final class TelemetryDeckManager: AnalyticsManager {
     private let logger = Logger(label: String(describing: TelemetryDeckManager.self))
     private let permissionProviders: [any PermissionProvider]
 
+    private let configuration: TelemetryDeckConfiguration
+    public var appID: String { configuration.apiKey }
+
+    public var hashedDefaultUser: String {
+        get async {
+            await TelemetryManager.shared.hashedDefaultUser
+        }
+    }
+
     public init(
         configuration: TelemetryDeckConfiguration,
         permissionProviders: [any PermissionProvider]
     ) {
+        self.configuration = configuration
         self.permissionProviders = permissionProviders
 
         let config = TelemetryDeck.Config(
-            appID: configuration.apiKey
+            appID: appID
         )
 
         #if DEBUG
@@ -50,6 +60,10 @@ public final class TelemetryDeckManager: AnalyticsManager {
         config.defaultParameterPrefix = "\(configuration.appName)."
 
         TelemetryDeck.initialize(config: config)
+    }
+
+    public func updateDefault(userID: String) {
+        TelemetryDeck.updateDefaultUserID(to: userID)
     }
 
     public func track(event: Event) {

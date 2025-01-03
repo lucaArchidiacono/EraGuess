@@ -8,8 +8,13 @@
 import AnalyticsDomain
 import Logger
 
+public struct MockAnalyticsConfiguration: AnalyticsConfiguration {
+    init() {}
+}
+
 public final class MockAnalyticsManager: AnalyticsManager {
     private let logger = Logger(label: "AnalyticsManager")
+    public let configuration = MockAnalyticsConfiguration()
 
     public init() {}
 

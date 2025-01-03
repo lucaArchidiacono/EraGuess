@@ -7,7 +7,4 @@
 
 import Foundation
 
-public protocol AnalyticsConfiguration {
-    var apiKey: String { get }
-    var securityGroupIdentifier: String { get }
-}
+public protocol AnalyticsConfiguration: Sendable {}
