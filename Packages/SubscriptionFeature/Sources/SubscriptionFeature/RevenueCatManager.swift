@@ -1,6 +1,6 @@
 //
-//  SubscriptionManagerImpl.swift
-//  SubscriptionFeature
+//  RevenueCatManager.swift
+//  CasaZurigo
 //
 //  Created by Luca Archidiacono on 25.05.2024.
 //
@@ -11,8 +11,9 @@ import Logger
 import RevenueCat
 import SubscriptionDomain
 
-public actor SubscriptionManagerImpl: SubscriptionManager {
-    private let logger = Logger(label: "SubscriptionManager")
+public final class RevenueCatManager: SubscriptionManager {
+    private let logger = Logger(label: String(describing: RevenueCatManager.self))
+    private let streamStore = StreamStore()
 
     private var subscriptonInfos: [String: SubscriptionDomain.SubscriptionInfo] {
         set {
@@ -20,7 +21,7 @@ public actor SubscriptionManagerImpl: SubscriptionManager {
 
             UserDefaults.standard.set(data, forKey: "entitlements")
 
-            for (value, continuation) in streams.values {
+            for (value, continuation) in streamStore.values {
                 let subscriptionInfo: SubscriptionDomain.SubscriptionInfo = self[value]
                 continuation.yield(subscriptionInfo)
             }
@@ -40,23 +41,19 @@ public actor SubscriptionManagerImpl: SubscriptionManager {
 
     public subscript(value: SubscriptionDomain.Entitlement) -> AsyncStream<SubscriptionDomain.SubscriptionInfo> {
         AsyncStream { continuation in
-            let id = streams.count + 1
+            let id = "\(streamStore.count + 1)"
 
             continuation.onTermination = { @Sendable [weak self] _ in
-                Task {
-                    await self?.removeCurrentSubscriptionStream(using: id)
-                }
+                self?.streamStore.removeStream(using: id)
             }
 
-            streams[id] = (value, continuation)
+            streamStore.addStream(using: id, (value, continuation))
 
             let subscriptionInfo: SubscriptionDomain.SubscriptionInfo = self[value]
 
             continuation.yield(subscriptionInfo)
         }
     }
-
-    private var streams: [Int: (Entitlement, AsyncStream<SubscriptionDomain.SubscriptionInfo>.Continuation)] = [:]
 
     public init(configuration: SubscriptionConfiguration) {
         #if DEBUG
@@ -65,11 +62,12 @@ public actor SubscriptionManagerImpl: SubscriptionManager {
             Purchases.logLevel = .verbose
         #endif
 
-        Purchases.configure(
-            with: Configuration.builder(withAPIKey: configuration.revenueCatAPIKey)
-                .with(userDefaults: .init(suiteName: configuration.securityGroupIdentifier)!)
-                .build()
-        )
+        let configuration = Configuration
+            .builder(withAPIKey: configuration.revenueCatAPIKey)
+            .with(userDefaults: .init(suiteName: configuration.securityGroupIdentifier)!)
+            .build()
+
+        Purchases.configure(with: configuration)
 
         Task.detached { [weak self] in
             for await customerInfo in Purchases.shared.customerInfoStream {
@@ -77,6 +75,12 @@ public actor SubscriptionManagerImpl: SubscriptionManager {
 
                 await checkEntitlement(using: customerInfo)
             }
+        }
+    }
+
+    deinit {
+        for value in streamStore.values {
+            value.1.finish()
         }
     }
 
@@ -97,11 +101,11 @@ public actor SubscriptionManagerImpl: SubscriptionManager {
 
     public func fetchPackages(using offeringID: String) async -> [RevenueCat.Package] {
         do {
-            logger.trace("Start fetching Packages from RevenueCat using: \(offeringID)")
+            logger.info("Start fetching Packages from RevenueCat using: \(offeringID)")
 
             let offerings = try await Purchases.shared.offerings()
             let packages = offerings[offeringID]?.availablePackages ?? []
-            logger.notice("Finished fetching Pacakges from RevenueCat with result: \(packages)")
+            logger.info("Finished fetching Pacakges from RevenueCat with result: \(packages)")
             return packages
         } catch {
             logger.error("Failed to fetch Offerings from RevenueCat with error: \(error)")
@@ -111,16 +115,16 @@ public actor SubscriptionManagerImpl: SubscriptionManager {
 
     public func buy(_ package: RevenueCat.Package) async {
         do {
-            logger.trace("Start making purchase from RevenueCat with package: \(package)")
+            logger.info("Start making purchase from RevenueCat with package: \(package)")
 
             let customerInfo = try await Purchases.shared.purchase(package: package)
-            logger.notice("Finished making purchase from RevenueCat with result: \(customerInfo)")
+            logger.info("Finished making purchase from RevenueCat with result: \(customerInfo)")
         } catch {
             logger.error("Failed to make purchase with error: \(error)")
         }
     }
 
-    private func removeCurrentSubscriptionStream(using id: Int) {
-        streams.removeValue(forKey: id)
+    public func updateAttributions(_ attributes: [String: String]) {
+        Purchases.shared.attribution.setAttributes(attributes)
     }
 }

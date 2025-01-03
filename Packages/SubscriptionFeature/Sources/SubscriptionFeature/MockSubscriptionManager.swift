@@ -9,33 +9,31 @@ import Foundation
 import RevenueCat
 import SubscriptionDomain
 
-public actor MockSubscriptionManager: SubscriptionManager {
+public final class MockSubscriptionManager: SubscriptionManager {
+    private nonisolated
+    let subscriptions: [String: SubscriptionDomain.SubscriptionInfo]
+    private let packages: [String]
+    private let streamStore = StreamStore()
+
     public subscript(value: Entitlement) -> SubscriptionDomain.SubscriptionInfo {
         subscriptions[value.rawValue] ?? SubscriptionInfo(identifier: value.rawValue, isActive: false)
     }
 
     public subscript(value: SubscriptionDomain.Entitlement) -> AsyncStream<SubscriptionDomain.SubscriptionInfo> {
         AsyncStream { continuation in
-            let id = UUID()
+            let id = UUID().uuidString
 
             continuation.onTermination = { @Sendable [weak self] _ in
-                Task {
-                    await self?.removeCurrentSubscriptionStream(using: id)
-                }
+                self?.streamStore.removeStream(using: id)
             }
 
-            streams[id] = continuation
+            streamStore.addStream(using: id, (value, continuation))
 
             let subscriptionInfo: SubscriptionDomain.SubscriptionInfo = self[value]
 
             continuation.yield(subscriptionInfo)
         }
     }
-
-    private nonisolated
-    let subscriptions: [String: SubscriptionDomain.SubscriptionInfo]
-    private let packages: [String]
-    private var streams: [UUID: AsyncStream<SubscriptionDomain.SubscriptionInfo>.Continuation] = [:]
 
     public init(
         subscriptions: [SubscriptionDomain.SubscriptionInfo],
@@ -67,9 +65,5 @@ public actor MockSubscriptionManager: SubscriptionManager {
 
     public func buy(_ package: Package) async {
         print("Successfully bought the package: \(package)")
-    }
-
-    private func removeCurrentSubscriptionStream(using id: UUID) {
-        streams.removeValue(forKey: id)
     }
 }

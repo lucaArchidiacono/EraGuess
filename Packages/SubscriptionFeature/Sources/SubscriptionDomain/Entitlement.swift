@@ -7,6 +7,6 @@
 
 import Foundation
 
-public enum Entitlement: String {
+public enum Entitlement: String, Sendable {
     case pro
 }

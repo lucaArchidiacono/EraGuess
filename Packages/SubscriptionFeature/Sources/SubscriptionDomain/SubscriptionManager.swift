@@ -8,7 +8,7 @@
 import Foundation
 import RevenueCat
 
-public protocol SubscriptionManager: Actor {
+public protocol SubscriptionManager: Sendable {
     subscript(_: Entitlement) -> AsyncStream<SubscriptionDomain.SubscriptionInfo> { get }
     func fetchPackages(using offeringID: String) async -> [Package]
     func buy(_ package: Package) async

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SubscriptionInfo: Codable, Equatable {
+public struct SubscriptionInfo: Codable, Equatable, Sendable {
     public let identifier: String
     public let isActive: Bool
 

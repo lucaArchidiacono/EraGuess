@@ -54,7 +54,7 @@ struct DependencyProvider {
             revenueCatAPIKey: EraGuessShared.revenueCatAPIKey,
             securityGroupIdentifier: EraGuessShared.Configuration.securityGroupIdentifier
         )
-        subscriptionManager = SubscriptionManagerImpl(configuration: subscriptionConfiguraiton)
+        subscriptionManager = RevenueCatManager(configuration: subscriptionConfiguraiton)
 
         let analyticsConfiguration = TelemetryDeckConfiguration(
             appName: EraGuessShared.Configuration.appName,
