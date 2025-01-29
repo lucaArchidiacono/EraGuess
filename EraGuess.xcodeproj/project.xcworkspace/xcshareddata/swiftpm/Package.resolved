@@ -15,7 +15,16 @@
       "location" : "https://github.com/simibac/ConfettiSwiftUI.git",
       "state" : {
         "branch" : "master",
-        "revision" : "469de4e43949815dc92570cc786922d8d1385b06"
+        "revision" : "77ce21c82cc5fa608ac921a0dea09dd85b5432c7"
+      }
+    },
+    {
+      "identity" : "pow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EmergeTools/Pow",
+      "state" : {
+        "revision" : "a504eb6d144bcf49f4f33029a2795345cb39e6b4",
+        "version" : "1.0.5"
       }
     },
     {
@@ -24,7 +33,7 @@
       "location" : "https://github.com/RevenueCat/purchases-ios-spm",
       "state" : {
         "branch" : "main",
-        "revision" : "774fc1f4d0f30b7825e7d2740fbd805d7a44e1be"
+        "revision" : "f2fe853ea18046e40f927c9bf118b8a4796a7ba9"
       }
     },
     {
@@ -68,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies",
       "state" : {
-        "revision" : "85f89f5d0ce5a18945f65371d40ca997da85a41a",
-        "version" : "1.6.3"
+        "revision" : "565a7be4c1c9a5e0bf77e5dc21f30f054ced9d06",
+        "version" : "1.6.4"
       }
     },
     {
@@ -104,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-perception",
       "state" : {
-        "revision" : "8d52279b9809ef27eabe7d5420f03734528f19da",
-        "version" : "1.4.1"
+        "revision" : "9e9ec5177724e78de1ecfd5b7bf881ae027be4ac",
+        "version" : "1.4.2"
       }
     },
     {
@@ -113,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-sharing",
       "state" : {
-        "revision" : "974e51b3612317ba5883a73dc9fd9e2409a11f2d",
-        "version" : "1.1.1"
+        "revision" : "55d2fef5008b054420f90d745ea0520850955462",
+        "version" : "1.1.3"
       }
     },
     {
@@ -131,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TelemetryDeck/SwiftSDK.git",
       "state" : {
-        "revision" : "e1a5f4ea47888e7e40cb2d40bea43ed4f1f5bfff",
-        "version" : "2.6.1"
+        "revision" : "b24e4ecb00ddc42569e96306675a09f417203c95",
+        "version" : "2.7.0"
       }
     },
     {
@@ -140,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "0837db354faf9c9deb710dc597046edaadf5360f",
-        "version" : "2.7.6"
+        "revision" : "6b4930da67b462d3f200472c902dd016d37a554d",
+        "version" : "2.7.7"
       }
     },
     {
