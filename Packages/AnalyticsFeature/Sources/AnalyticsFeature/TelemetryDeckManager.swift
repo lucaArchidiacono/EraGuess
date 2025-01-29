@@ -30,7 +30,7 @@ public struct TelemetryDeckConfiguration: AnalyticsConfiguration {
 
 public final class TelemetryDeckManager: AnalyticsManager {
     private let logger = Logger(label: String(describing: TelemetryDeckManager.self))
-    private let permissionProviders: [any PermissionProvider]
+    private let permissions: [any PermissionProvider]
 
     private let configuration: TelemetryDeckConfiguration
     public var appID: String { configuration.apiKey }
@@ -43,10 +43,10 @@ public final class TelemetryDeckManager: AnalyticsManager {
 
     public init(
         configuration: TelemetryDeckConfiguration,
-        permissionProviders: [any PermissionProvider]
+        permissions: [any PermissionProvider]
     ) {
         self.configuration = configuration
-        self.permissionProviders = permissionProviders
+        self.permissions = permissions
 
         let config = TelemetryDeck.Config(
             appID: appID
@@ -74,10 +74,10 @@ public final class TelemetryDeckManager: AnalyticsManager {
 
             var defaultParameters: [String: String] = [:]
 
-            for permissionProvider in permissionProviders {
-                let status = await permissionProvider.fetchStatus()
+            for permission in permissions {
+                let status = await permission.fetchStatus()
 
-                switch permissionProvider {
+                switch permission {
                 case is NotificationPermissionProvider:
                     defaultParameters["notificationPermission"] = status.description
                 case is MusicKitPermissionProvider:
@@ -85,7 +85,7 @@ public final class TelemetryDeckManager: AnalyticsManager {
                 case is LocationPermissionProvider:
                     defaultParameters["locationPermission"] = status.description
                 default:
-                    logger.warning("Unknown permission provider: \(permissionProvider)")
+                    logger.warning("Unknown permission provider: \(permission)")
                     continue
                 }
             }

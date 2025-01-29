@@ -36,11 +36,11 @@ public enum Event: Sendable {
     public protocol FeatureProtocol: Sendable {
         var rawValue: String { get }
     }
-    
+
     public struct Feature: FeatureProtocol {
         public let rawValue: String
 
-        public init(_ rawValue: String) {
+        private init(rawValue: String) {
             self.rawValue = rawValue
         }
     }
