@@ -63,7 +63,7 @@ struct DependencyProvider {
         )
         analyticsManager = TelemetryDeckManager(
             configuration: analyticsConfiguration,
-            permissionProviders: [
+            permissions: [
                 notificationPermissionProvider,
                 musicKitPermissionProvider,
             ]

@@ -22,6 +22,7 @@ let package = Package(
         .package(path: "../StateFeature"),
         .package(path: "../SharedUI"),
         .package(path: "../FAQUI"),
+        .package(url: "https://github.com/simibac/ConfettiSwiftUI.git", branch: "master"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -35,6 +36,7 @@ let package = Package(
                 "StateFeature",
                 "SharedUI",
                 "FAQUI",
+                .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI"),
             ]
         ),
     ]

@@ -48,11 +48,9 @@ struct ContentView: View {
 extension ContentView {
     private var onboardingFeature: some View {
         OnboardingView(
+            appState: appStateManager,
             analyticsManager: analyticsManager,
-            notificationPermissionProvider: notificationPermissionProvider,
-            onDismiss: {
-                appStateManager.$hasSeenOnboarding.withLock { $0 = true }
-            }
+            notificationPermissionProvider: notificationPermissionProvider
         )
     }
 }
