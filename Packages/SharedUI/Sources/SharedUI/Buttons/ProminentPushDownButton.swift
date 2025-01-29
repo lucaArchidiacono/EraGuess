@@ -1,14 +1,15 @@
 //
-//  ProminentButton.swift
+//  ProminentPushDownButton.swift
 //  SharedUI
 //
-//  Created by Luca Archidiacono on 31.12.2024.
+//  Created by Luca Archidiacono on 15.01.2025.
 //
 
 import Foundation
+import Pow
 import SwiftUI
 
-public struct ProminentButton<Content: View>: View {
+public struct ProminentPushDownButton<Content: View>: View {
     private let action: () -> Void
     private let label: () -> Content
 
@@ -24,13 +25,15 @@ public struct ProminentButton<Content: View>: View {
         Button(action: action) {
             label()
                 .bold()
+                .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
+                .background(.tint, in: RoundedRectangle(cornerRadius: 8))
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(PushDownButtonStyle())
     }
 }
 
 #Preview {
-    ProminentButton(action: {}, label: { Text("Button") })
+    ProminentPushDownButton(action: {}, label: { Text("Button") })
 }

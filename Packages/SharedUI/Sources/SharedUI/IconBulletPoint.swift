@@ -8,53 +8,49 @@
 import Foundation
 import SwiftUI
 
-public struct BulletPointConfig: Hashable {
-    let icon: BulletPointIcon?
-    let title: String
-    let description: String
-
-    public enum BulletPointIcon: Hashable {
-        case system(name: String)
-        case custom(name: String, bundle: Bundle? = .main)
-    }
-
-    public init(
-        icon: BulletPointIcon? = nil,
-        title: String,
-        description: String
-    ) {
-        self.icon = icon
-        self.title = title
-        self.description = description
-    }
-}
-
-public struct IconBulletPoint: View {
+public struct IconBulletPoint<Content: View>: View {
     // MARK: - Properties
 
-    public let config: BulletPointConfig
+    public let config: IconBulletPointConfig
 
-    private var iconSize: CGFloat = 45
+    private var iconSize: CGFloat = 35
     private var iconSpacing: CGFloat = 16
     private var titleFont: Font = .headline
     private var descriptionFont: Font = .subheadline
     private var descriptionColor: Color = .secondary
     private var alignment: HorizontalAlignment = .leading
+    private let content: Content?
 
     public init(
-        config: BulletPointConfig
+        config: IconBulletPointConfig,
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.config = config
+        self.content = content()
+    }
+
+    public init(
+        config: IconBulletPointConfig
+    ) where Content == Never {
+        self.config = config
+        content = nil
     }
 
     // MARK: - Body
 
     public var body: some View {
-        HStack(alignment: .top) {
-            bulletIcon
-                .padding(.trailing, iconSpacing)
+        VStack(alignment: alignment) {
+            HStack(alignment: .top) {
+                bulletIcon
+                    .padding(.trailing, iconSpacing)
 
-            textContent
+                textContent
+            }
+
+            if let content {
+                content
+                    .padding(.top)
+            }
         }
     }
 
@@ -89,9 +85,11 @@ public struct IconBulletPoint: View {
             Text(config.title)
                 .font(titleFont)
 
-            Text(config.description)
-                .font(descriptionFont)
-                .foregroundColor(descriptionColor)
+            if let description = config.description {
+                Text(description)
+                    .font(descriptionFont)
+                    .foregroundColor(descriptionColor)
+            }
         }
     }
 }
@@ -133,5 +131,49 @@ public extension IconBulletPoint {
         var view = self
         view.alignment = alignment
         return view
+    }
+}
+
+public struct IconBulletPointConfig: Hashable {
+    let icon: BulletPointIcon?
+    let title: String
+    let description: String?
+
+    public enum BulletPointIcon: Hashable {
+        case system(name: String)
+        case custom(name: String, bundle: Bundle? = .main)
+    }
+
+    public init(
+        icon: BulletPointIcon? = nil,
+        title: String,
+        description: String?
+    ) {
+        self.icon = icon
+        self.title = title
+        self.description = description
+    }
+}
+
+@resultBuilder
+public struct IconBulletPointBuilder {
+    public static func buildBlock<V>(_ components: IconBulletPoint<V>...) -> [IconBulletPoint<V>] {
+        components
+    }
+
+    public static func buildOptional<V>(_ component: IconBulletPoint<V>?) -> [IconBulletPoint<V>] {
+        component.map { [$0] } ?? []
+    }
+
+    public static func buildEither<V>(first component: IconBulletPoint<V>) -> [IconBulletPoint<V>] {
+        [component]
+    }
+
+    public static func buildEither<V>(second component: IconBulletPoint<V>) -> [IconBulletPoint<V>] {
+        [component]
+    }
+
+    public static func buildArray<V>(_ components: [IconBulletPoint<V>]) -> [IconBulletPoint<V>] {
+        components
     }
 }

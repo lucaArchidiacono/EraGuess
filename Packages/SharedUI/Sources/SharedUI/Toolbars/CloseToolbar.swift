@@ -39,11 +39,13 @@ public extension CloseToolbar {
         copy.width = width
         return copy
     }
+
     func height(_ height: CGFloat) -> Self {
         var copy = self
         copy.height = height
         return copy
     }
+
     func frame(width: CGFloat, height: CGFloat) -> Self {
         var copy = self
         copy.width = width

@@ -8,34 +8,25 @@
 import Foundation
 import SwiftUI
 
-public struct AppleInfoConfig {
-    let title: String
-    let bulletPoints: [BulletPointConfig]
-    let buttonTitle: String?
-    let onAction: ((@escaping () -> Void) -> Void)?
-
-    public init(
-        title: String,
-        bulletPoints: [BulletPointConfig],
-        buttonTitle: String? = nil,
-        onAction: ((@escaping () -> Void) -> Void)? = nil
-    ) {
-        self.title = title
-        self.bulletPoints = bulletPoints
-        self.buttonTitle = buttonTitle
-        self.onAction = onAction
-    }
-}
-
-public struct AppleInfoView: View {
+public struct AppleInfoView<Content>: View where Content: View {
     @State private var isLoading: Bool = false
 
     private let config: AppleInfoConfig
+    private let bulletPoints: [IconBulletPoint<Content>]
+
+    public init(
+        config: AppleInfoConfig,
+        @IconBulletPointBuilder bulletPoints: () -> [IconBulletPoint<Content>]
+    ) {
+        self.config = config
+        self.bulletPoints = bulletPoints()
+    }
 
     public init(
         config: AppleInfoConfig
-    ) {
+    ) where Content == Never {
         self.config = config
+        bulletPoints = []
     }
 
     public var body: some View {
@@ -47,6 +38,7 @@ public struct AppleInfoView: View {
                let onAction = config.onAction
             {
                 button(buttonTitle, action: onAction)
+                    .padding(.bottom)
             }
         }
     }
@@ -60,11 +52,11 @@ public struct AppleInfoView: View {
 
     var list: some View {
         List {
-            Group {
-                bulletPoints
+            ForEach(Array(bulletPoints.enumerated()), id: \.offset) { _, bulletPoint in
+                bulletPoint
+                    .padding(.horizontal)
+                    .listRowSeparator(.hidden)
             }
-            .padding(.horizontal)
-            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
@@ -72,12 +64,16 @@ public struct AppleInfoView: View {
         .listRowBackground(Color.clear)
     }
 
-    func button(_ title: String, action: @escaping (@escaping () -> Void) -> Void) -> some View {
-        ProminentButton {
-            isLoading.toggle()
+    func button(
+        _ title: String,
+        action: @escaping () async -> Void
+    ) -> some View {
+        ProminentPushDownButton {
+            isLoading = true
 
-            action {
-                isLoading.toggle()
+            Task {
+                await action()
+                isLoading = false
             }
         } label: {
             Group {
@@ -89,11 +85,37 @@ public struct AppleInfoView: View {
                 }
             }
         }
+        .padding(.horizontal)
+    }
+}
+
+public struct AppleInfoConfig {
+    let title: String
+    let buttonTitle: String?
+    let onAction: (() async -> Void)?
+
+    public init(
+        title: String,
+        buttonTitle: String? = nil,
+        onAction: (() -> Void)? = nil
+    ) {
+        self.title = title
+        self.buttonTitle = buttonTitle
+        self.onAction = {
+            await withCheckedContinuation { continuation in
+                onAction?()
+                continuation.resume()
+            }
+        }
     }
 
-    private var bulletPoints: some View {
-        ForEach(config.bulletPoints, id: \.self) { config in
-            IconBulletPoint(config: config)
-        }
+    public init(
+        title: String,
+        buttonTitle: String? = nil,
+        onAction: (() async -> Void)? = nil
+    ) {
+        self.title = title
+        self.buttonTitle = buttonTitle
+        self.onAction = onAction
     }
 }
